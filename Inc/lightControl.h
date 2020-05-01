@@ -17,6 +17,6 @@ void indicatorStatus();
 void fogLightStatus();
 void headLampStatus();
 void puddleLightStatus();
-void svigelLightStatus();
+//void svigelLightStatus();
 
 #endif /* LIGHTCONTROL_H_ */
