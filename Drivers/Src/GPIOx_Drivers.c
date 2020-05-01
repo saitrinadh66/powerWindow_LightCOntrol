@@ -314,21 +314,3 @@ void GPIO_IRQHandling(uint8_t PinNumber)
 {
 
 }
-/****************************************************************************************************
-  * @fn 			   - GPIO_														*
-  * 																								*
-  * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
-  * 																								*
-  * @param[in]		   - base address of the GPIO peripheral										*
-  * @param[in]		   - ENABLE or DISABLE Macros													*
-  * @param[in]          -																			*
-  * 																								*
-  * @return			   -																			*
-  * 																								*
-  * @Note			   -			s																*
-  ***************************************************************************************************/
-
-void GPIO_IRQHandling(uint8_t PinNumber)
-{
-
-}

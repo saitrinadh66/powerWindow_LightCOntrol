@@ -29,34 +29,22 @@ void delay(void)
 
 int main()
 {
-	GPIO_Handle_t GpioLed, GpioBtn;
-	GpioLed.pGPIOx = GPIOG;
-	GpioLed.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_13;
-	GpioLed.GPIO_PinConfig.GPIO_PinMode 		= GPIO_MODE_OUTPUT;
-	GpioLed.GPIO_PinConfig.GPIO_PinSpeed		= GPIO_SPEED_FAST;
-	GpioLed.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_OD;
-	GpioLed.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;
-
-	GPIO_PCLK_Control(GPIOG, ENABLE);
-
-	GPIO_Init(&GpioLed);
-
-	GpioBtn.pGPIOx = GPIOA;
-	GpioBtn.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
-	GpioBtn.GPIO_PinConfig.GPIO_PinMode 		= GPIO_MODE_INPUT;
-	GpioBtn.GPIO_PinConfig.GPIO_PinSpeed		= GPIO_SPEED_FAST;
-	GpioBtn.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PD;
+	GPIO_Handle_t GPIO_BTN;
+	GPIO_BTN.pGPIOx = GPIOA;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinMode 		= GPIO_MODE_INPUT;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinSpeed		= GPIO_SPEED_FAST;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PD;
 
 	GPIO_PCLK_Control(GPIOA, ENABLE);
 
-	GPIO_Init(&GpioBtn);
-
+	GPIO_Init(&GPIO_BTN);
 	while(1)
 	{
 		if(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_0) == BTN_PRESSED)
 		{
 			delay();
-			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_13);
+			LC_ReadingLight(1);
 		}
 	}
 	return 0;
