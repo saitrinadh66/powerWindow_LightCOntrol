@@ -10,10 +10,43 @@
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
+/*
+ * 002LEDWithBtn.c
+ *
+ *  Created on: 14-Mar-2020
+ *      Author: vicky
+ */
 
 #include"main.h"
 
-int main(void)
+#define HIGH 					1
+#define BTN_PRESSED 			HIGH
+
+void delay(void)
 {
+	for(uint32_t i = 0; i < 500000; i++);
+}
+
+int main()
+{
+	GPIO_Handle_t GPIO_BTN;
+	GPIO_BTN.pGPIOx = GPIOA;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinMode 		= GPIO_MODE_INPUT;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinSpeed		= GPIO_SPEED_FAST;
+	GPIO_BTN.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PD;
+
+	GPIO_PCLK_Control(GPIOA, ENABLE);
+
+	GPIO_Init(&GPIO_BTN);
+	while(1)
+	{
+		if(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_0) == BTN_PRESSED)
+		{
+			delay();
+			LC_ReadingLight(1);
+		}
+	}
 	return 0;
 }
+
