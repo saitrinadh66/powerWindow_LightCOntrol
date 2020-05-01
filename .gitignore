@@ -1,0 +1,5 @@
+*.settings
+*.md
+*.project
+*.cproject
+*.ld
