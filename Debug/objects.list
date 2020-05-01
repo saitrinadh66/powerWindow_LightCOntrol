@@ -4,7 +4,7 @@
 "Drivers/Src/SPIx_Drivers.o"
 "Src/LightControl.o"
 "Src/PowerWindow.o"
-"Src/main.o"
 "Src/syscalls.o"
 "Src/sysmem.o"
+"Src/test.o"
 "Startup/startup_stm32f429zitx.o"
