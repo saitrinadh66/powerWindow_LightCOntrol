@@ -8,5 +8,4 @@
 #ifndef POWERWINDOW_H_
 #define POWERWINDOW_H_
 
-
 #endif /* POWERWINDOW_H_ */
