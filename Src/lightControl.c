@@ -5,5 +5,3 @@
  *      Author: dubey
  */
 
-
-void fun(void);
