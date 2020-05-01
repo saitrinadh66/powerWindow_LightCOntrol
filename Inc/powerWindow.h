@@ -8,6 +8,6 @@
 #ifndef POWERWINDOW_H_
 #define POWERWINDOW_H_
 
-
+void rapidup();
 
 #endif /* POWERWINDOW_H_ */
