@@ -6,3 +6,4 @@
  */
 
 
+void fun(void);
