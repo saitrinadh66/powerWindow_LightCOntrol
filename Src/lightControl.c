@@ -52,5 +52,6 @@ void LC_ReadingLight(int Switch)
 			GPIO_PCLK_Control(GPIOG, ENABLE);
 
 			GPIO_Init(&GPIO_LED);
+			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_14);
 	}
 }

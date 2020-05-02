@@ -7,10 +7,10 @@
 #include"PowerWindow.h"
 void RapidUpDriverBtn(void)
 {
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_7);
+	PowerWindowBtnInit(GPIOA, GPIO_PIN_NO_0);
 	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI9_5,ENABLE);
+	GPIO_IRQPriorityConfig(IRQ_NO_EXTI0,NVIC_IRQ_PRI15);
+	GPIO_IRQInterruptConfig(IRQ_NO_EXTI0,ENABLE);
 }
 void RapidDownDriverBtn(void)
 {
@@ -22,7 +22,7 @@ void RapidDownDriverBtn(void)
 }
 void RapidUpFrontLeftBtn(void)
 {
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_9);
+	PowerWindowBtnInit(GPIOG, GPIO_PIN_NO_5);
 	//IRQ configurations
 	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5,NVIC_IRQ_PRI15);
 	GPIO_IRQInterruptConfig(IRQ_NO_EXTI9_5,ENABLE);
@@ -75,18 +75,18 @@ void BLDC_Motor(void)
 {
 
 }
-void PowerWindowBtnInit(char* GPIOx, int PinNumber)
+void PowerWindowBtnInit(GPIO_RegDef_t *pGPIOx, int PinNumber)
 {
 
 	GPIO_Handle_t GPIOBtn;
 	memset(&GPIOBtn,0,sizeof(GPIOBtn));
-	GPIOBtn.pGPIOx = (GPIO_RegDef_t*)GPIOx;
+	GPIOBtn.pGPIOx = pGPIOx;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinNumber = PinNumber;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN_FT;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PD;
 
-	GPIO_PCLK_Control(((GPIO_RegDef_t*)GPIOx), ENABLE);
+	GPIO_PCLK_Control(pGPIOx, ENABLE);
 
 	GPIO_Init(&GPIOBtn);
 }

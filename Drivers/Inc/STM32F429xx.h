@@ -512,9 +512,9 @@ typedef struct
 /*
  * Bit position definitions I2C_OAR1
  */
-#define I2C_OAR1_ADD0    				 0
-#define I2C_OAR1_ADD71 				 	 1
-#define I2C_OAR1_ADD98  			 	 8
+#define I2C_OAR1_ADD0    				0
+#define I2C_OAR1_ADD71 				 	1
+#define I2C_OAR1_ADD98  			 	8
 #define I2C_OAR1_ADDMODE   			 	15
 
 /*
@@ -550,15 +550,15 @@ typedef struct
 #define I2C_CCR_DUTY 					14
 #define I2C_CCR_FS  				 	15
 
-#define GPIO_BASEADDR_TO_CODE(x)		  	((x == GPIOA)?0:\
-											(x == GPIOB)?1:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOC)?2:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOD)?3:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOE)?4:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOF)?5:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOG)?6:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOH)?7:\
-		 	 	 	 	 	 	 	 	 	(x == GPIOI)?8:0)
+#define GPIO_BASEADDR_TO_CODE(x)		((x == GPIOA)?0:\
+										(x == GPIOB)?1:\
+		 	 	 	 	 	 	 	 	(x == GPIOC)?2:\
+		 	 	 	 	 	 	 	 	(x == GPIOD)?3:\
+		 	 	 	 	 	 	 	 	(x == GPIOE)?4:\
+		 	 	 	 	 	 	 	 	(x == GPIOF)?5:\
+		 	 	 	 	 	 	 	 	(x == GPIOG)?6:\
+		 	 	 	 	 	 	 	 	(x == GPIOH)?7:\
+		 	 	 	 	 	 	 	 	(x == GPIOI)?8:0)
 
 
 /*

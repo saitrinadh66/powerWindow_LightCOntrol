@@ -8,6 +8,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+#include<string.h>
 #include"LightControl.h"
 #include"PowerWindow.h"
 #include"GPIOx_Drivers.h"

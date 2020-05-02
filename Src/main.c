@@ -30,13 +30,20 @@ void delay(void)
 int main(void)
 {
 	RapidUpFrontLeftBtn();
+	RapidUpDriverBtn();
 	while(1);
 }
+void EXTI9_5_IRQHandler(void)
+{
+    //delay(); //200ms . wait till button de-bouncing gets over
+	GPIO_IRQHandling(GPIO_PIN_NO_5); //clear the pending event from exti line
+	LC_ReadingLight(1);
+}
+
 void EXTI0_IRQHandler(void)
 {
     //delay(); //200ms . wait till button de-bouncing gets over
 	GPIO_IRQHandling(GPIO_PIN_NO_0); //clear the pending event from exti line
-	LC_ReadingLight(1);
+	LC_ReadingLight(2);
 }
-
 
