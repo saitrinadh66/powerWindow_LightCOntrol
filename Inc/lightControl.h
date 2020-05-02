@@ -13,7 +13,7 @@
 
 void LC_GlobeBoxStatus();
 void LC_BootSpaceStatus();
-void LC_ReadingLight();
+void LC_ReadingLight(int);
 void LC_IndicatorStatus();
 void LC_FogLightStatus();
 void LC_HeadLampStatus();

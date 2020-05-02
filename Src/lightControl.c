@@ -24,7 +24,7 @@
 
 void LC_ReadingLight(int Switch)
 {
-	if ( Switch  == 1 )
+	if ( Switch == 1)
 		{
 			GPIO_Handle_t GPIO_LED;
 			GPIO_LED.pGPIOx = GPIOG;
@@ -43,7 +43,7 @@ void LC_ReadingLight(int Switch)
 	{
 			GPIO_Handle_t GPIO_LED;
 			GPIO_LED.pGPIOx = GPIOG;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_14; // Rear Reading is connected to PIN 14 of PORT G
+			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_14; // Front Reading is connected to PIN 14 of PORT G
 			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT; // GPIO output mode is configured as Output
 			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST; // Fast Speed is Selected
 			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD; // Open Drain Configuration

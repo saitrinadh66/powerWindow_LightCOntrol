@@ -44,7 +44,7 @@ int main(void)
 		if(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_0) == BTN_PRESSED)
 		{
 			delay();
-			LC_ReadingLight(1);
+			LC_ReadingLight("front");
 		}
 	}
 	return 0;
