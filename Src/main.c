@@ -27,7 +27,7 @@ void delay(void)
 	for(uint32_t i = 0; i < 500000; i++);
 }
 
-int main()
+int main(void)
 {
 	GPIO_Handle_t GPIO_BTN;
 	GPIO_BTN.pGPIOx = GPIOA;
@@ -44,7 +44,7 @@ int main()
 		if(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_0) == BTN_PRESSED)
 		{
 			delay();
-			LC_ReadingLight(1);
+			LC_ReadingLight("front");
 		}
 	}
 	return 0;

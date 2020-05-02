@@ -1,0 +1,4 @@
+PowerWindow.c:9:6:RapidUp	4	static
+PowerWindow.c:13:6:RapidDown	4	static
+PowerWindow.c:17:6:AntiPinch	4	static
+PowerWindow.c:21:6:BLDC_Motor	4	static
