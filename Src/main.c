@@ -27,7 +27,7 @@ void delay(void)
 	for(uint32_t i = 0; i < 500000; i++);
 }
 
-int main()
+int main(void)
 {
 	GPIO_Handle_t GPIO_BTN;
 	GPIO_BTN.pGPIOx = GPIOA;
