@@ -19,25 +19,25 @@
 * ARM Cortex M4 Processor NVIC ISERx register Addresses
  */
 
-#define NVIC_ISER0							((__vo uint32_t*)0xE00E100)
-#define NVIC_ISER1							((__vo uint32_t*)0xE00E104)
-#define NVIC_ISER2							((__vo uint32_t*)0xE00E108)
-#define NVIC_ISER3							((__vo uint32_t*)0xE00E10C)
+#define NVIC_ISER0							((__vo uint32_t*)0xE000E100)
+#define NVIC_ISER1							((__vo uint32_t*)0xE000E104)
+#define NVIC_ISER2							((__vo uint32_t*)0xE000E108)
+#define NVIC_ISER3							((__vo uint32_t*)0xE000E10C)
 
 /*
 * ARM Cortex M4 Processor NVIC ICERx register Addresses                              *
  */
 
-#define NVIC_ICER0							((__vo uint32_t*)0xE00E180)
-#define NVIC_ICER1							((__vo uint32_t*)0xE00E184)
-#define NVIC_ICER2							((__vo uint32_t*)0xE00E188)
-#define NVIC_ICER3							((__vo uint32_t*)0xE00E18C)
+#define NVIC_ICER0							((__vo uint32_t*)0xE000E180)
+#define NVIC_ICER1							((__vo uint32_t*)0xE000E184)
+#define NVIC_ICER2							((__vo uint32_t*)0xE000E188)
+#define NVIC_ICER3							((__vo uint32_t*)0xE000E18C)
 
 /*
  * ARM Cortex M4 Processor Priority Register Addresses
  */
 
-#define NVIC_PR_BASEADDR					((__vo uint32_t*)0xE00E400)
+#define NVIC_PR_BASEADDR					((__vo uint32_t*)0xE000E400)
 /*
  * ARM Cortex M4 Processor number of priority bits implemented in priority register
  */
@@ -416,6 +416,12 @@ typedef struct
 	 __vo uint32_t I2SPR;
 }SPI_RegDef_t;
 
+
+/*
+ * macros for all the possible priority levels
+ */
+#define NVIC_IRQ_PRI0   		0
+#define NVIC_IRQ_PRI15    		15
 
 /*
  * Some Generic Macros
