@@ -41,7 +41,7 @@ all: powerWindow_LightCOntrol.elf secondary-outputs
 
 # Tool invocations
 powerWindow_LightCOntrol.elf: $(OBJS) $(USER_OBJS) D:\STM32CubeIDE\workspace_1.0.2\powerWindow_LightCOntrol\STM32F429ZITX_FLASH.ld
-	arm-none-eabi-gcc -o "powerWindow_LightCOntrol.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\STM32CubeIDE\workspace_1.0.2\powerWindow_LightCOntrol\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="powerWindow_LightCOntrol.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "powerWindow_LightCOntrol.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\STM32CubeIDE\workspace_1.0.2\powerWindow_LightCOntrol\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="powerWindow_LightCOntrol.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

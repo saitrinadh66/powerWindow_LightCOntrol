@@ -16,7 +16,7 @@ void RapidUpRearLeftBtn(void);
 void RapidDownRearLeftBtn(void);
 void RapidUpRearRightBtn(void);
 void RapidDownRearRightBtn(void);
-void PowerWindowBtnInit(char*, int);
+void PowerWindowBtnInit(GPIO_RegDef_t*, int);
 void AntiPinch(void);
 void BLDC_Motor(void);
 #endif /* POWERWINDOW_H_ */
