@@ -1,16 +1,16 @@
 /*
- * test.c
+ * 002led_button.c
  *
- *  Created on: May 2, 2020
+ *  Created on: Feb 1, 2020
  *      Author: dubey
  */
 
 #include<string.h>
 #include"main.h"
 
-#define HIGH 1
-#define LOW 0
-#define BTN_PRESSED LOW
+#define HIGH 			1
+#define LOW 			0
+#define BTN_PRESSED 	LOW
 
 void delay(void)
 {
@@ -20,8 +20,8 @@ void delay(void)
 
 int main(void)
 {
-	GPIO_Handle_t GpioLed, GPIOBtn;
 
+	GPIO_Handle_t GpioLed, GPIOBtn;
 	memset(&GpioLed,0,sizeof(GpioLed));
 	memset(&GPIOBtn,0,sizeof(GpioLed));
 
@@ -41,7 +41,7 @@ int main(void)
 	//this is btn gpio configuration
 	GPIOBtn.pGPIOx = GPIOA;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;
-	GPIOBtn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN_RT;
+	GPIOBtn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN_FT;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
 	GPIOBtn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PD;
 
@@ -49,20 +49,16 @@ int main(void)
 
 	GPIO_Init(&GPIOBtn);
 
-	GPIO_WriteToOutputPin(GPIOG, GPIO_PIN_NO_13, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOG,GPIO_PIN_NO_13,GPIO_PIN_RESET);
 	//IRQ configurations
-	//GPIO_IRQPriorityConfig(IRQ_NO_EXTI0,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI0, ENABLE);
+	GPIO_IRQPriorityConfig(IRQ_NO_EXTI0,NVIC_IRQ_PRI15);
+	GPIO_IRQInterruptConfig(IRQ_NO_EXTI0,ENABLE);
 
     while(1);
-
 }
-
-
-void EXTI9_5_IRQHandler(void)
+void EXTI0_IRQHandler(void)
 {
-   delay(); //200ms . wait till button de-bouncing gets over
+    //delay(); //200ms . wait till button de-bouncing gets over
 	GPIO_IRQHandling(GPIO_PIN_NO_0); //clear the pending event from exti line
 	GPIO_ToggleOutputPin(GPIOG,GPIO_PIN_NO_13);
 }
-

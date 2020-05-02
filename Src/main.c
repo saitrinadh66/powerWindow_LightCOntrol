@@ -20,7 +20,7 @@
 #include"main.h"
 
 #define HIGH 					1
-#define BTN_PRESSED 			HIGH
+#define BTN_PRESSED 			LOW
 
 void delay(void)
 {
@@ -29,24 +29,14 @@ void delay(void)
 
 int main(void)
 {
-	GPIO_Handle_t GPIO_BTN;
-	GPIO_BTN.pGPIOx = GPIOA;
-	GPIO_BTN.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
-	GPIO_BTN.GPIO_PinConfig.GPIO_PinMode 		= GPIO_MODE_INPUT;
-	GPIO_BTN.GPIO_PinConfig.GPIO_PinSpeed		= GPIO_SPEED_FAST;
-	GPIO_BTN.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PD;
-
-	GPIO_PCLK_Control(GPIOA, ENABLE);
-
-	GPIO_Init(&GPIO_BTN);
-	while(1)
-	{
-		if(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_0) == BTN_PRESSED)
-		{
-			delay();
-			LC_ReadingLight("front");
-		}
-	}
-	return 0;
+	RapidUpFrontLeftBtn();
+	while(1);
 }
+void EXTI0_IRQHandler(void)
+{
+    //delay(); //200ms . wait till button de-bouncing gets over
+	GPIO_IRQHandling(GPIO_PIN_NO_0); //clear the pending event from exti line
+	LC_ReadingLight(1);
+}
+
 
