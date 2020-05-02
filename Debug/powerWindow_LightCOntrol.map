@@ -327,7 +327,13 @@ Discarded input sections
                 0x0000000000000000       0x24 Src/PowerWindow.o
  .text.AntiPinch
                 0x0000000000000000        0xc Src/PowerWindow.o
- .text.BLDC_Motor
+ .text.Start_BLDC_Motor
+                0x0000000000000000        0xc Src/PowerWindow.o
+ .text.Stop_BLDC_Motor
+                0x0000000000000000        0xc Src/PowerWindow.o
+ .text.IsWindowFullyOpen
+                0x0000000000000000        0xc Src/PowerWindow.o
+ .text.IsWindowFulluClose
                 0x0000000000000000        0xc Src/PowerWindow.o
  .debug_macro   0x0000000000000000      0xa66 Src/PowerWindow.o
  .debug_macro   0x0000000000000000       0x22 Src/PowerWindow.o
@@ -987,12 +993,12 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000000000195       0x1e c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/crtn.o
 OUTPUT(powerWindow_LightCOntrol.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x1d17
- .debug_info    0x0000000000000000      0x711 Drivers/Src/GPIOx_Drivers.o
- .debug_info    0x0000000000000711      0x21f Src/LightControl.o
- .debug_info    0x0000000000000930      0xac7 Src/PowerWindow.o
- .debug_info    0x00000000000013f7      0x8fe Src/main.o
- .debug_info    0x0000000000001cf5       0x22 Startup/startup_stm32f429zitx.o
+.debug_info     0x0000000000000000     0x1d47
+ .debug_info    0x0000000000000000      0x70d Drivers/Src/GPIOx_Drivers.o
+ .debug_info    0x000000000000070d      0x21f Src/LightControl.o
+ .debug_info    0x000000000000092c      0xafb Src/PowerWindow.o
+ .debug_info    0x0000000000001427      0x8fe Src/main.o
+ .debug_info    0x0000000000001d25       0x22 Startup/startup_stm32f429zitx.o
 
 .debug_abbrev   0x0000000000000000      0x589
  .debug_abbrev  0x0000000000000000      0x13f Drivers/Src/GPIOx_Drivers.o
@@ -1001,24 +1007,24 @@ OUTPUT(powerWindow_LightCOntrol.elf elf32-littlearm)
  .debug_abbrev  0x00000000000003ca      0x1ad Src/main.o
  .debug_abbrev  0x0000000000000577       0x12 Startup/startup_stm32f429zitx.o
 
-.debug_aranges  0x0000000000000000      0x160
+.debug_aranges  0x0000000000000000      0x178
  .debug_aranges
                 0x0000000000000000       0x70 Drivers/Src/GPIOx_Drivers.o
  .debug_aranges
                 0x0000000000000070       0x20 Src/LightControl.o
  .debug_aranges
-                0x0000000000000090       0x70 Src/PowerWindow.o
+                0x0000000000000090       0x88 Src/PowerWindow.o
  .debug_aranges
-                0x0000000000000100       0x38 Src/main.o
+                0x0000000000000118       0x38 Src/main.o
  .debug_aranges
-                0x0000000000000138       0x28 Startup/startup_stm32f429zitx.o
+                0x0000000000000150       0x28 Startup/startup_stm32f429zitx.o
 
-.debug_ranges   0x0000000000000000      0x118
+.debug_ranges   0x0000000000000000      0x130
  .debug_ranges  0x0000000000000000       0x60 Drivers/Src/GPIOx_Drivers.o
  .debug_ranges  0x0000000000000060       0x10 Src/LightControl.o
- .debug_ranges  0x0000000000000070       0x60 Src/PowerWindow.o
- .debug_ranges  0x00000000000000d0       0x28 Src/main.o
- .debug_ranges  0x00000000000000f8       0x20 Startup/startup_stm32f429zitx.o
+ .debug_ranges  0x0000000000000070       0x78 Src/PowerWindow.o
+ .debug_ranges  0x00000000000000e8       0x28 Src/main.o
+ .debug_ranges  0x0000000000000110       0x20 Startup/startup_stm32f429zitx.o
 
 .debug_macro    0x0000000000000000     0x1896
  .debug_macro   0x0000000000000000       0x8a Drivers/Src/GPIOx_Drivers.o
@@ -1051,23 +1057,23 @@ OUTPUT(powerWindow_LightCOntrol.elf elf32-littlearm)
  .debug_macro   0x0000000000001636       0xd6 Src/PowerWindow.o
  .debug_macro   0x000000000000170c      0x18a Src/main.o
 
-.debug_line     0x0000000000000000     0x1723
+.debug_line     0x0000000000000000     0x175d
  .debug_line    0x0000000000000000      0x62d Drivers/Src/GPIOx_Drivers.o
  .debug_line    0x000000000000062d      0x427 Src/LightControl.o
- .debug_line    0x0000000000000a54      0x666 Src/PowerWindow.o
- .debug_line    0x00000000000010ba      0x5e5 Src/main.o
- .debug_line    0x000000000000169f       0x84 Startup/startup_stm32f429zitx.o
+ .debug_line    0x0000000000000a54      0x6a0 Src/PowerWindow.o
+ .debug_line    0x00000000000010f4      0x5e5 Src/main.o
+ .debug_line    0x00000000000016d9       0x84 Startup/startup_stm32f429zitx.o
 
-.debug_str      0x0000000000000000     0x92f2
+.debug_str      0x0000000000000000     0x932d
  .debug_str     0x0000000000000000     0x5e7a Drivers/Src/GPIOx_Drivers.o
                                        0x6097 (size before relaxing)
  .debug_str     0x0000000000005e7a       0x47 Src/LightControl.o
                                        0x5e1d (size before relaxing)
- .debug_str     0x0000000000005ec1     0x33ac Src/PowerWindow.o
-                                       0x91fe (size before relaxing)
- .debug_str     0x000000000000926d       0x54 Src/main.o
+ .debug_str     0x0000000000005ec1     0x33e7 Src/PowerWindow.o
+                                       0x9239 (size before relaxing)
+ .debug_str     0x00000000000092a8       0x54 Src/main.o
                                        0x9089 (size before relaxing)
- .debug_str     0x00000000000092c1       0x31 Startup/startup_stm32f429zitx.o
+ .debug_str     0x00000000000092fc       0x31 Startup/startup_stm32f429zitx.o
                                          0x70 (size before relaxing)
 
 .comment        0x0000000000000000       0x7b
@@ -1077,10 +1083,10 @@ OUTPUT(powerWindow_LightCOntrol.elf elf32-littlearm)
  .comment       0x000000000000007b       0x7c Src/PowerWindow.o
  .comment       0x000000000000007b       0x7c Src/main.o
 
-.debug_frame    0x0000000000000000      0x428
+.debug_frame    0x0000000000000000      0x488
  .debug_frame   0x0000000000000000      0x1c8 Drivers/Src/GPIOx_Drivers.o
  .debug_frame   0x00000000000001c8       0x34 Src/LightControl.o
- .debug_frame   0x00000000000001fc      0x154 Src/PowerWindow.o
- .debug_frame   0x0000000000000350       0x8c Src/main.o
- .debug_frame   0x00000000000003dc       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
- .debug_frame   0x0000000000000408       0x20 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000000001fc      0x1b4 Src/PowerWindow.o
+ .debug_frame   0x00000000000003b0       0x8c Src/main.o
+ .debug_frame   0x000000000000043c       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000000468       0x20 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-memset.o)

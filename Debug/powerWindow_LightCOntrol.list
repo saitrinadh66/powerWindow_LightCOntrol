@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 0000002a  00000000  00000000  00010ad4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00001d17  00000000  00000000  00010afe  2**0
+ 12 .debug_info   00001d47  00000000  00000000  00010afe  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000589  00000000  00000000  00012815  2**0
+ 13 .debug_abbrev 00000589  00000000  00000000  00012845  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000160  00000000  00000000  00012da0  2**3
+ 14 .debug_aranges 00000178  00000000  00000000  00012dd0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000118  00000000  00000000  00012f00  2**3
+ 15 .debug_ranges 00000130  00000000  00000000  00012f48  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00001896  00000000  00000000  00013018  2**0
+ 16 .debug_macro  00001896  00000000  00000000  00013078  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00001723  00000000  00000000  000148ae  2**0
+ 17 .debug_line   0000175d  00000000  00000000  0001490e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000092f2  00000000  00000000  00015fd1  2**0
+ 18 .debug_str    0000932d  00000000  00000000  0001606b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  0001f2c3  2**0
+ 19 .comment      0000007b  00000000  00000000  0001f398  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000428  00000000  00000000  0001f340  2**2
+ 20 .debug_frame  00000488  00000000  00000000  0001f414  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -856,10 +856,10 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
  800071e:	4770      	bx	lr
 
 08000720 <GPIO_IRQInterruptConfig>:
- *
- * @Note              -
-
- */
+ *																									*
+ * @Note              - 																			*
+ *																									*
+ ***************************************************************************************************/
 void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 {
  8000720:	b480      	push	{r7}
@@ -1006,10 +1006,10 @@ void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
  8000824:	e000e188 	.word	0xe000e188
 
 08000828 <GPIO_IRQPriorityConfig>:
- *
- * @Note              -
-
- */
+ *																									*
+ * @Note              -																				*
+ *																									*
+ ***************************************************************************************************/
 void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority)
 {
  8000828:	b480      	push	{r7}
@@ -1018,24 +1018,24 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority)
  800082e:	4603      	mov	r3, r0
  8000830:	6039      	str	r1, [r7, #0]
  8000832:	71fb      	strb	r3, [r7, #7]
-	//1. first lets find out the ipr register
-	uint8_t iprx = IRQNumber / 4;
+	//1. first lets find out the IPR register
+	uint8_t IPRx = IRQNumber / 4;
  8000834:	79fb      	ldrb	r3, [r7, #7]
  8000836:	089b      	lsrs	r3, r3, #2
  8000838:	73fb      	strb	r3, [r7, #15]
-	uint8_t iprx_section  = IRQNumber %4 ;
+	uint8_t IPRx_Section  = IRQNumber %4 ;
  800083a:	79fb      	ldrb	r3, [r7, #7]
  800083c:	f003 0303 	and.w	r3, r3, #3
  8000840:	73bb      	strb	r3, [r7, #14]
 
-	uint8_t shift_amount = ( 8 * iprx_section) + ( 8 - NO_PR_BITS_IMPLEMENTED) ;
+	uint8_t Shift_Amount = ( 8 * IPRx_Section) + ( 8 - NO_PR_BITS_IMPLEMENTED) ;
  8000842:	7bbb      	ldrb	r3, [r7, #14]
  8000844:	00db      	lsls	r3, r3, #3
  8000846:	b2db      	uxtb	r3, r3
  8000848:	3304      	adds	r3, #4
  800084a:	737b      	strb	r3, [r7, #13]
 
-	*(  NVIC_PR_BASEADDR + iprx ) |=  ( IRQPriority << shift_amount );
+	*(  NVIC_PR_BASEADDR + IPRx ) |=  ( IRQPriority << Shift_Amount );
  800084c:	7bfb      	ldrb	r3, [r7, #15]
  800084e:	009b      	lsls	r3, r3, #2
  8000850:	f103 4360 	add.w	r3, r3, #3758096384	; 0xe0000000
@@ -1060,10 +1060,10 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority)
 	...
 
 0800087c <GPIO_IRQHandling>:
- *
- * @Note              -
-
- */
+ *																									*
+ * @Note              -																				*
+ *																									*
+ ***************************************************************************************************/
 void GPIO_IRQHandling(uint8_t PinNumber)
 {
  800087c:	b480      	push	{r7}
@@ -1201,10 +1201,10 @@ void LC_ReadingLight(int Switch)
  800093c:	40021800 	.word	0x40021800
 
 08000940 <RapidUpDriverBtn>:
- *  Created on: April 27, 2020
- *      Author: dubey
- */
-#include"PowerWindow.h"
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
 void RapidUpDriverBtn(void)
 {
  8000940:	b580      	push	{r7, lr}
@@ -1228,10 +1228,10 @@ void RapidUpDriverBtn(void)
  8000960:	40020000 	.word	0x40020000
 
 08000964 <RapidUpFrontLeftBtn>:
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI9_5,ENABLE);
-
-}
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
 void RapidUpFrontLeftBtn(void)
 {
  8000964:	b580      	push	{r7, lr}
@@ -1255,10 +1255,10 @@ void RapidUpFrontLeftBtn(void)
  8000984:	40021800 	.word	0x40021800
 
 08000988 <PowerWindowBtnInit>:
-void BLDC_Motor(void)
-{
-
-}
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
 void PowerWindowBtnInit(GPIO_RegDef_t *pGPIOx, int PinNumber)
 {
  8000988:	b580      	push	{r7, lr}
