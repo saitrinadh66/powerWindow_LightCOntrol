@@ -72,11 +72,9 @@ void GPIO_PCLK_Control(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
  * 																									*
  * @brief			   - this Function initialize the pin of the given GPIO				 			*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - GPIO Pin number @GPIO																			*
- * @param[in]          -																			*
+ * @param[in]		   - GPIO_Handle_t structure pointer											*
  * 																									*
- * @return			   -																			*
+ * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -95,7 +93,39 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	}
 	else
 	{
-		//interrupt mode setup
+		if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IN_FT )
+		{
+			//1. configure the FTSR
+			EXTI->FTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+			//Clear the corresponding RTSR bit
+			EXTI->RTSR &= ~( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+
+		}
+		else if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode ==GPIO_MODE_IN_RT )
+		{
+			//1 . configure the RTSR
+			EXTI->RTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+			//Clear the corresponding RTSR bit
+			EXTI->FTSR &= ~( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+
+		}
+		else if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IN_RFT )
+		{
+			//1. configure both FTSR and RTSR
+			EXTI->RTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+			//Clear the corresponding RTSR bit
+			EXTI->FTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		}
+
+	//2. configure the GPIO port selection in SYSCFG_EXTICR
+	uint8_t temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber / 4 ;
+	uint8_t temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber % 4;
+	uint8_t portcode = GPIO_BASEADDR_TO_CODE(pGPIOHandle->pGPIOx);
+	SYSCFG_PCLK_EN();
+	SYSCFG->EXTICR[temp1] = portcode << ( temp2 * 4);
+
+	//3 . enable the exti interrupt delivery using IMR
+	EXTI->IMR |= 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber;
 	}
 
 	//2 . GPIO Speed Configuration
@@ -137,13 +167,11 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 /****************************************************************************************************
  * @fn 				   - GPIO_DeInit																*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
  * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
  * 																									*
- * @return			   -																			*
+ * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -173,13 +201,12 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
 /****************************************************************************************************
  * @fn 				   - GPIO_ReadFromInputPin														*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @brief			   - this Function Read the given Pin Number for the given GPIO port  			*
  * 																									*
  * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
+ * @param[in]		   - Pin Number																	*
  * 																									*
- * @return			   - 0 or 1																	*
+ * @return			   - 0 or 1																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -195,13 +222,11 @@ uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
 /****************************************************************************************************
  * @fn 				   - GPIO_ReadFromInputPort														*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @brief			   - this Function Reads the given GPIO port  									*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
+ * @param[in]		   - Base address of the GPIO peripheral										*
  * 																									*
- * @return			   - 																		*
+ * @return			   - 0 or 1																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -216,13 +241,13 @@ uint16_t  GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx)
 /****************************************************************************************************
  * @fn 				   - GPIO_WriteToOutputPin														*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @brief			   - this Function SET the given Pin number for the given GPIOx		  			*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
+ * @param[in]		   - Base address of the GPIO peripheral										*
+ * @param[in]		   - Pin Number																	*
+ * @param[in]		   - SET or RESET																*
  * 																									*
- * @return			   -																			*
+ * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -242,13 +267,12 @@ void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Val
 /****************************************************************************************************
  * @fn 				   - GPIO_WriteToOutputPin														*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @brief			   - this Function SET the given GPIOx											*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
+ * @param[in]		   - Base address of the GPIO peripheral										*
+ * @param[in]		   - SET or RESET Macros														*
  * 																									*
- * @return			   -																			*
+ * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -261,13 +285,12 @@ void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value)
 /****************************************************************************************************
  * @fn 				   - GPIO_ToggleOutputPin														*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @brief			   - this Function toggle the Given GPIOx Pin Number							  	*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
+ * @param[in]		   - Base address of the GPIO peripheral										*
+ * @param[in]		   - Pin Number																	*																	*
  * 																									*
- * @return			   -																			*
+ * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
@@ -278,39 +301,104 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
 }
 
 /****************************************************************************************************
- * @fn 				   - GPIO_IRQConfig																*
+ * @fn      		  - GPIO_IRQConfig 																*
+ *																									*
+ * @brief             - 																			*
  * 																									*
- * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
+ * @param[in]         - IRQNumber 																	*
+ * @param[in]         -	ENABLE or DISABLE 															*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * @param[in]		   - ENABLE or DISABLE Macros													*
- * @param[in]          -																			*
- * 																									*
- * @return			   -																			*
- * 																									*
- * @Note			   -																			*
+ * @return            -	None 																		*
+ *																									*
+ * @Note              - 																			*
+ *																									*
  ***************************************************************************************************/
-
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDi)
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 {
+
+	if(EnorDi == ENABLE)
+	{
+		if(IRQNumber <= 31)
+		{
+			//program ISER0 register
+			*NVIC_ISER0 |= ( 1 << IRQNumber );
+
+		}else if(IRQNumber > 31 && IRQNumber < 64 ) //32 to 63
+		{
+			//program ISER1 register
+			*NVIC_ISER1 |= ( 1 << (IRQNumber % 32) );
+		}
+		else if(IRQNumber >= 64 && IRQNumber < 96 )
+		{
+			//program ISER2 register //64 to 95
+			*NVIC_ISER2 |= ( 1 << (IRQNumber % 64) );
+		}
+	}
+	else
+	{
+		if(IRQNumber <= 31)
+		{
+			//program ICER0 register
+			*NVIC_ICER0 |= ( 1 << IRQNumber );
+		}else if(IRQNumber > 31 && IRQNumber < 64 )
+		{
+			//program ICER1 register
+			*NVIC_ICER1 |= ( 1 << (IRQNumber % 32) );
+		}
+		else if(IRQNumber >= 64 && IRQNumber < 96 )
+		{
+			//program ICER2 register
+			*NVIC_ICER2 |= ( 1 << (IRQNumber % 64) );
+		}
+	}
 
 }
 
-/****************************************************************************************************
-  * @fn 			   - GPIO_IRQHandling														*
-  * 																								*
-  * @brief			   - this Function enables or disable peripheral clock for the given GPIO port  *
-  * 																								*
-  * @param[in]		   - base address of the GPIO peripheral										*
-  * @param[in]		   - ENABLE or DISABLE Macros													*
-  * @param[in]          -																			*
-  * 																								*
-  * @return			   -																			*
-  * 																								*
-  * @Note			   -			s																*
-  ***************************************************************************************************/
 
+
+/****************************************************************************************************
+ * @fn      		  - SPI_IRQPriorityConfig 														*
+ * 																									*
+ * @brief             -																				*
+ * 																									*
+ * @param[in]         -	IRQNumber 																	*
+ * @param[in]         -	IRQPriority 																*
+ * 																									*
+ * @return            -	None 																		*
+ *																									*
+ * @Note              -																				*
+ *																									*
+ ***************************************************************************************************/
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority)
+{
+	//1. first lets find out the IPR register
+	uint8_t IPRx = IRQNumber / 4;
+	uint8_t IPRx_Section  = IRQNumber %4 ;
+
+	uint8_t Shift_Amount = ( 8 * IPRx_Section) + ( 8 - NO_PR_BITS_IMPLEMENTED) ;
+
+	*(  NVIC_PR_BASEADDR + IPRx ) |=  ( IRQPriority << Shift_Amount );
+
+}
+/****************************************************************************************************
+ * @fn      		  - GPIO_IRQHandling 															*
+ *																									*
+ * @brief             -																				*
+ *																									*
+ * @param[in]         -	PinNumber																	*
+ *																									*
+ * @return            - None																		*
+ *																									*
+ * @Note              -																				*
+ *																									*
+ ***************************************************************************************************/
 void GPIO_IRQHandling(uint8_t PinNumber)
 {
+	//clear the exti pr register corresponding to the pin number
+	if(EXTI->PR & ( 1 << PinNumber))
+	{
+		//clear
+		EXTI->PR |= ( 1 << PinNumber);
+	}
 
 }

@@ -10,10 +10,40 @@
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
+/*
+ * 002LEDWithBtn.c
+ *
+ *  Created on: 14-Mar-2020
+ *      Author: vicky
+ */
 
 #include"main.h"
 
+#define HIGH 					1
+#define BTN_PRESSED 			LOW
+
+void delay(void)
+{
+	for(uint32_t i = 0; i < 500000; i++);
+}
+
 int main(void)
 {
-	return 0;
+	RapidUpFrontLeftBtn();
+	RapidUpDriverBtn();
+	while(1);
 }
+void EXTI9_5_IRQHandler(void)
+{
+    //delay(); //200ms . wait till button de-bouncing gets over
+	GPIO_IRQHandling(GPIO_PIN_NO_5); //clear the pending event from exti line
+	LC_ReadingLight(1);
+}
+
+void EXTI0_IRQHandler(void)
+{
+    //delay(); //200ms . wait till button de-bouncing gets over
+	GPIO_IRQHandling(GPIO_PIN_NO_0); //clear the pending event from exti line
+	LC_ReadingLight(2);
+}
+

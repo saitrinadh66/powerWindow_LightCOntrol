@@ -8,15 +8,16 @@
 #ifndef LIGHTCONTROL_H_
 #define LIGHTCONTROL_H_
 
+#include"STM32F429xx.h"
+#include"GPIOx_Drivers.h"
 
-
-void globeBoxStatus();
-void bootSpaceStatus();
-void readingLight();
-void indicatorStatus();
-void fogLightStatus();
-void headLampStatus();
-void puddleLightStatus();
-void svigelLightStatus();
+void LC_GlobeBoxStatus();
+void LC_BootSpaceStatus();
+void LC_ReadingLight(int);
+void LC_IndicatorStatus();
+void LC_FogLightStatus();
+void LC_HeadLampStatus();
+void LC_PuddleLightStatus();
+void LC_SvigelLightStatus();
 
 #endif /* LIGHTCONTROL_H_ */
