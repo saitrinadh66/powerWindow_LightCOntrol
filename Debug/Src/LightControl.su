@@ -1,6 +1,0 @@
-lightControl.c:25:6:LC_ReadingLight	40	static
-lightControl.c:71:6:LC_BootSpace	32	static
-lightControl.c:102:6:LC_GloveBox	32	static
-lightControl.c:133:6:FogLamps	32	static
-lightControl.c:164:6:HeadLamps	32	static
-lightControl.c:196:6:LC_TurningLight	40	static
