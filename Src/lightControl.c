@@ -35,7 +35,6 @@ void LC_ReadingLight(int Switch)
 			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
 			GPIO_PCLK_Control(GPIOG, ENABLE);
-
 			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_13);
 		}
