@@ -68,9 +68,9 @@ void LC_ReadingLight(int Switch)
  * 																									*
  * @Note			   - 																			*
  ***************************************************************************************************/
-void LC_BootSpace(int Button_7)
+void LC_BootSpaceStatus(int Button_7)
 {
-	if ( Button_7 == 1 || Button_7 == 0 )
+	if ( Button_7 == 1 )
 		{
 			GPIO_Handle_t GPIO_LED;
 			GPIO_LED.pGPIOx = GPIOD;
@@ -99,9 +99,9 @@ void LC_BootSpace(int Button_7)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void LC_GloveBox(int Button_8)
+void LC_GlobeBoxStatus(int Button_8)
 {
-	if (Button_8 == 1 || Button_8 == 0 )
+	if (Button_8 == 1 )
 		{
 			GPIO_Handle_t GPIO_LED;
 			GPIO_LED.pGPIOx = GPIOD;
@@ -130,9 +130,9 @@ void LC_GloveBox(int Button_8)
  * 																									*
  * @Note			   - Lamp1 & Lamp2 connected to PC12 in parallel																			*
  ***************************************************************************************************/
-void FogLamps(int Button_1)
+void LC_FogLightStatus(int Button_1)
 {
-	if (Button_1 == 1 || Button_1 == 0 )
+	if (Button_1 == 1 )
 		{
 			GPIO_Handle_t GPIO_LED;
 			GPIO_LED.pGPIOx = GPIOC;
@@ -161,9 +161,9 @@ void FogLamps(int Button_1)
  * 																									*
  * @Note			   - LED_3, Lamp_3 & Lamp_4 are connected in parallel to PC13																			*
  ***************************************************************************************************/
-void HeadLamps(int Button_2)
+void LC_HeadLampStatus(int Button_2)
 {
-	if (Button_2 == 1 || Button_2 == 0 )
+	if (Button_2 == 1)
 		{
 			GPIO_Handle_t GPIO_LED;
 			GPIO_LED.pGPIOx = GPIOC;
@@ -193,7 +193,7 @@ void HeadLamps(int Button_2)
  * @Note			   - LED_7, Lamp_7, Lamp_8, Lamp_9 are connected in parallel to PC14
 						 LED_6, Lamp_10, Lamp_11, Lamp_12 are connected in parallel to PC15
  ***************************************************************************************************/
-void LC_ReadingLight(int SwitchButton)
+void LC_IndicatorStatus(int SwitchButton)
 {
 	if ( SwitchButton == 1)
 		{
@@ -225,4 +225,35 @@ void LC_ReadingLight(int SwitchButton)
 			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
 	}
+}
+/****************************************************************************************************
+ * @fn 				   - LC_PuddleLightStatus															*
+ * 																									*
+ * @brief			   - this Function turns ON and OFF the puddle lamp           *
+ * 																									*
+ * @param[in]		   - Button_x													*
+ * @param[in]		   -                     														*
+ * @param[in]          -																			*
+ * 																									*
+ * @return			   -																			*
+ * 																									*
+ * @Note			   - LED_3, Lamp_3 & Lamp_4 are connected in parallel to PC13																			*
+ ***************************************************************************************************/
+void LC_PuddleLightStatus(int Button_x)
+{
+	if (Button_x == 1)
+			{
+				GPIO_Handle_t GPIO_LED;
+				GPIO_LED.pGPIOx = GPIOG;
+				GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_15;
+				GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
+				GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+				GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
+				GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+				GPIO_PCLK_Control(GPIOG, ENABLE);
+
+				GPIO_Init(&GPIO_LED);
+				GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
+			}
 }
