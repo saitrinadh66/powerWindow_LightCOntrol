@@ -133,7 +133,6 @@ void LC_HeadLampStatus(int Button_2)
  * @Note			   - LED_7, Lamp_7, Lamp_8, Lamp_9 are connected in parallel to PC14
 						 LED_6, Lamp_10, Lamp_11, Lamp_12 are connected in parallel to PC15
  ***************************************************************************************************/
-void LC_IndicatorStatus(int SwitchButton)
 {
 	if ( SwitchButton == 1)
 		{

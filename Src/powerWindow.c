@@ -182,7 +182,7 @@ void AntiPinch(void)
 }
 
 /****************************************************************************************************
- * @fn 				   - Start_BLDC_Motor															*
+ * @fn 				   - Start_BLDC_Motor_CW															*
  * 																									*
  * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
@@ -192,9 +192,30 @@ void AntiPinch(void)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void Start_BLDC_Motor(void)
+void Start_BLDC_Motor_CW(void)
 {
-
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_0, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_2, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_3, GPIO_PIN_RESET);
+}
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_CCW															*
+ * 																									*
+ * @brief			   - this Function De-initialize the given GPIO port  							*
+ * 																									*
+ * @param[in]		   - base address of the GPIO peripheral										*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_CCW(void)
+{
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_0, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_1, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_2, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_3, GPIO_PIN_SET);
 }
 /****************************************************************************************************
  * @fn 				   - Stop_BLDC_Motor															*
@@ -209,7 +230,10 @@ void Start_BLDC_Motor(void)
  ***************************************************************************************************/
 void Stop_BLDC_Motor(void)
 {
-
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_0, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_2, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_3, GPIO_PIN_RESET);
 }
 /****************************************************************************************************
  * @fn 				   - IsWindowFullyOpen															*
@@ -265,4 +289,45 @@ void PowerWindowBtnInit(GPIO_RegDef_t *pGPIOx, int PinNumber)
 	GPIO_PCLK_Control(pGPIOx, ENABLE);
 
 	GPIO_Init(&GPIOBtn);
+}
+void Motor_GPIO_Init()
+{
+	GPIO_Handle_t GPIO_Motor1_CCW;
+	GPIO_Handle_t GPIO_Motor1_CW;
+	GPIO_Handle_t GPIO_Motor2_CCW;
+	GPIO_Handle_t GPIO_Motor2_CW;
+
+	GPIO_Motor1_CCW.pGPIOx = GPIOE;
+	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;
+	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
+	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinOPType = GPIO_OUT_TYPE_PP;
+
+	GPIO_PCLK_Control(GPIOE, ENABLE);
+	GPIO_Init(&GPIO_Motor1_CCW);
+
+	GPIO_Motor1_CW.pGPIOx = GPIOE;
+	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
+	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
+	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinOPType = GPIO_OUT_TYPE_PP;
+
+	GPIO_Init(&GPIO_Motor1_CW);
+
+	GPIO_Motor2_CCW.pGPIOx = GPIOE;
+	GPIO_Motor2_CCW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_2;
+	GPIO_Motor2_CCW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
+	GPIO_Motor2_CCW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	GPIO_Motor2_CCW.GPIO_PinConfig.GPIO_PinOPType = GPIO_OUT_TYPE_PP;
+
+	GPIO_Init(&GPIO_Motor2_CCW);
+
+	GPIO_Motor2_CW.pGPIOx = GPIOE;
+	GPIO_Motor2_CW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_3;
+	GPIO_Motor2_CW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
+	GPIO_Motor2_CW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+	GPIO_Motor2_CW.GPIO_PinConfig.GPIO_PinOPType = GPIO_OUT_TYPE_PP;
+
+	GPIO_Init(&GPIO_Motor2_CW);
+
 }
