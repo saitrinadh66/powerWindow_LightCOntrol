@@ -24,7 +24,6 @@ void delay(void)
 
 int main(void)
 {
-	GPIO_InOut_Init();
 	RapidUpFrontLeftBtn();
 	RapidUpDriverBtn();
 	while(1);

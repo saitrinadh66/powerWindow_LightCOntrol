@@ -26,7 +26,6 @@ void LC_ReadingLight(int Switch)
 {
 	if ( Switch == 1)
 		{
-
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_13);
 		}
 	if ( Switch == 2 )
