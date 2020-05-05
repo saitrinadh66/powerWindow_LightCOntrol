@@ -26,32 +26,12 @@ void LC_ReadingLight(int Switch)
 {
 	if ( Switch == 1)
 		{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOG;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_13; // Rear Reading is connected to PIN 13 of PORT G
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOG, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_13);
 		}
 	if ( Switch == 2 )
 	{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOG;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_14; // Front Reading is connected to PIN 14 of PORT G
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT; // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST; // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD; // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD; // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOG, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_14);
 	}
 }
@@ -72,17 +52,7 @@ void LC_BootSpaceStatus(int Button_7)
 {
 	if ( Button_7 == 1 )
 		{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOD;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_12;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOD, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
 		}
 }
@@ -103,17 +73,7 @@ void LC_GlobeBoxStatus(int Button_8)
 {
 	if (Button_8 == 1 )
 		{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOD;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_13;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOD, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_13);
 		}
 }
@@ -134,17 +94,7 @@ void LC_FogLightStatus(int Button_1)
 {
 	if (Button_1 == 1 )
 		{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOC;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_12;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOC, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_12);
 		}
 }
@@ -165,17 +115,7 @@ void LC_HeadLampStatus(int Button_2)
 {
 	if (Button_2 == 1)
 		{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOC;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_13;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOC, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_13);
 		}
 }
@@ -197,33 +137,13 @@ void LC_IndicatorStatus(int SwitchButton)
 {
 	if ( SwitchButton == 1)
 		{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOC;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_14; // Left turning indicator lamps connected to PIN 14 of PORT C
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOC, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
 			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_14);
 		}
 	if ( SwitchButton == 2 )
 	{
-			GPIO_Handle_t GPIO_LED;
-			GPIO_LED.pGPIOx = GPIOC;
-			GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_15; // Right turning indicator lamps connected to PIN 15 of PORT C
-			GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT; // GPIO output mode is configured as Output
-			GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST; // Fast Speed is Selected
-			GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD; // Open Drain Configuration
-			GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD; // No Pull Up or No Pull Down
 
-			GPIO_PCLK_Control(GPIOC, ENABLE);
-
-			GPIO_Init(&GPIO_LED);
-			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
+			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_15);
 	}
 }
 /****************************************************************************************************
@@ -243,17 +163,7 @@ void LC_PuddleLightStatus(int Button_x)
 {
 	if (Button_x == 1)
 			{
-				GPIO_Handle_t GPIO_LED;
-				GPIO_LED.pGPIOx = GPIOG;
-				GPIO_LED.GPIO_PinConfig.GPIO_PinNumber 			= GPIO_PIN_NO_15;
-				GPIO_LED.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-				GPIO_LED.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-				GPIO_LED.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_OD;  // Open Drain Configuration
-				GPIO_LED.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
-				GPIO_PCLK_Control(GPIOG, ENABLE);
-
-				GPIO_Init(&GPIO_LED);
 				GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
 			}
 }
