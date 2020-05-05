@@ -79,7 +79,7 @@ void GPIO_PCLK_Control(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
  * @Note			   -																			*
  ***************************************************************************************************/
 
-void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
+void GPIO_Init(GPIO_RegDef_t *pGPIOx, GPIO_Handle_t *pGPIOHandle)
 {
 	//1. GPIO Mode configuration
 
@@ -88,8 +88,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	{
 		//non interrupt mode
 		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << ( 2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-		pGPIOHandle->pGPIOx->MODER &= ~( 0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
-		pGPIOHandle->pGPIOx->MODER |= temp;
+		pGPIOx->MODER &= ~( 0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		pGPIOx->MODER |= temp;
 	}
 	else
 	{
@@ -132,8 +132,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 
 	temp = 0;
 	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << ( 2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->OSPEEDR &= ~( 0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
-	pGPIOHandle->pGPIOx->OSPEEDR |= temp;
+	pGPIOx->OSPEEDR &= ~( 0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOx->OSPEEDR |= temp;
 
 
 
@@ -141,15 +141,15 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 
 	temp = 0;
 	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << ( 2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->PUPDR &= ~( 0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
-	pGPIOHandle->pGPIOx->PUPDR |= temp;
+	pGPIOx->PUPDR &= ~( 0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOx->PUPDR |= temp;
 
 	//4. GPIO Output Type configuration
 
 	temp = 0;
 	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << ( 2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->OTYPER &= ~( 0x1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
-	pGPIOHandle->pGPIOx->OTYPER |= temp;
+	pGPIOx->OTYPER &= ~( 0x1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOx->OTYPER |= temp;
 
 	//5. GPIO Alternate function configuration
 
@@ -159,8 +159,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 		uint8_t temp1, temp2;
 		temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber / 8;
 		temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber % 8;
-		pGPIOHandle->pGPIOx->AFR[temp1] &= ~(0xF << (4 * temp2 ));
-		pGPIOHandle->pGPIOx->AFR[temp1] |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * temp2 ));
+		pGPIOx->AFR[temp1] &= ~(0xF << (4 * temp2 ));
+		pGPIOx->AFR[temp1] |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * temp2 ));
 	}
 }
 
