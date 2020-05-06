@@ -7,6 +7,144 @@
 
 #include"LightControl.h"
 
+GPIO_LC_Input_Init()
+{
+	GPIO_Handle_t GPIO_LC_Input;
+	GPIO_LC_Input.pGPIOx = GPIOD;
+	// various register configuration
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_INPUT;  // GPIO output mode is configured as Output
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_1;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_2;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_3;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_4;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_5;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_6;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_7;
+	GPIO_Init(&GPIO_LC_Input);
+
+
+	GPIO_LC_Input.pGPIOx = GPIOC;
+
+	// various register configuration
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_0;
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_ANALOG;  // GPIO output mode is configured as Output
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_12;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_13;
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.pGPIOx = GPIOA;
+
+	// various register configuration
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_4;
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_ANALOG;  // GPIO output mode is configured as Output
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_LC_Input);
+
+	GPIO_LC_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_5;
+	GPIO_Init(&GPIO_LC_Input);
+}
+GPIO_LC_Output_Init()
+{
+	GPIO_Handle_t GPIO_LC_Output;
+	GPIO_LC_Output.pGPIOx = GPIOD;
+	// various register configuration
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_12;
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_LC_Output);
+
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_13;
+	GPIO_Init(&GPIO_LC_Output);
+
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_14;
+	GPIO_Init(&GPIO_LC_Output);
+
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_15;
+	GPIO_Init(&GPIO_LC_Output);
+
+
+	GPIO_LC_Output.pGPIOx = GPIOC;
+
+	// various register configuration
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_14;
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_LC_Output);
+
+	GPIO_LC_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_15;
+	GPIO_Init(&GPIO_LC_Output);
+}
+
+void LC_GlobeBoxSwitch(void)
+{
+
+}
+void LC_BootSpaceSwitch(void)
+{
+
+}
+/*
+void LC_FrontReadingLightSwitch(char)
+{
+
+}
+void LC_LeftReadingLightSwitch(char)
+{
+
+}
+void LC_LeftIndicatorSwitch(char)
+{
+
+}
+void LC_RightIndicatorSwitch(char)
+{
+
+}
+void LC_FogLightSwitch(void)
+{
+
+}
+void LC_HeadLampSwitch(void)
+{
+
+}
+void LC_PuddleLightSwitch(void)
+{
+
+}*/
 
 /****************************************************************************************************
  * @fn 				   - LC_ReadingLight															*
@@ -22,13 +160,13 @@
  * @Note			   -																			*
  ***************************************************************************************************/
 
-void LC_ReadingLight(int Switch)
+void LC_ReadingLight(char Switch)
 {
-	if ( Switch == 1)
+	if ( Switch == 'f') //  front reading light
 		{
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_13);
 		}
-	if ( Switch == 2 )
+	if ( Switch == 'r')  // rear reading light
 	{
 
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_14);
@@ -39,7 +177,7 @@ void LC_ReadingLight(int Switch)
  * 																									*
  * @brief			   - this Function turns ON and OFF the BootSpace Lamp           *
  * 																									*
- * @param[in]		   - Button_7													*
+ * @param[in]		   - 													*
  * @param[in]		   -                     														*
  * @param[in]          -																			*
  * 																									*
@@ -47,13 +185,9 @@ void LC_ReadingLight(int Switch)
  * 																									*
  * @Note			   - 																			*
  ***************************************************************************************************/
-void LC_BootSpaceStatus(int Button_7)
+void LC_BootSpaceStatus(void)
 {
-	if ( Button_7 == 1 )
-		{
 
-			GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
-		}
 }
 /****************************************************************************************************
  * @fn 				   - LC_GloveBox															*
@@ -68,13 +202,9 @@ void LC_BootSpaceStatus(int Button_7)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void LC_GlobeBoxStatus(int Button_8)
+void LC_GlobeBoxStatus(void)
 {
-	if (Button_8 == 1 )
-		{
 
-			GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_13);
-		}
 }
 /****************************************************************************************************
  * @fn 				   - LC_FogLamps															*
@@ -89,13 +219,8 @@ void LC_GlobeBoxStatus(int Button_8)
  * 																									*
  * @Note			   - Lamp1 & Lamp2 connected to PC12 in parallel																			*
  ***************************************************************************************************/
-void LC_FogLightStatus(int Button_1)
+void LC_FogLightStatus(void)
 {
-	if (Button_1 == 1 )
-		{
-
-			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_12);
-		}
 }
 /****************************************************************************************************
  * @fn 				   - LC_HeadLamps															*
@@ -110,13 +235,9 @@ void LC_FogLightStatus(int Button_1)
  * 																									*
  * @Note			   - LED_3, Lamp_3 & Lamp_4 are connected in parallel to PC13																			*
  ***************************************************************************************************/
-void LC_HeadLampStatus(int Button_2)
+void LC_HeadLampStatus(void)
 {
-	if (Button_2 == 1)
-		{
 
-			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_13);
-		}
 }
 /****************************************************************************************************
  * @fn 				   - LC_TurningIndicators															*
@@ -132,16 +253,16 @@ void LC_HeadLampStatus(int Button_2)
  * @Note			   - LED_7, Lamp_7, Lamp_8, Lamp_9 are connected in parallel to PC14
 						 LED_6, Lamp_10, Lamp_11, Lamp_12 are connected in parallel to PC15
  ***************************************************************************************************/
+void LC_TurningIndicators(char SwitchButton)
 {
-	if ( SwitchButton == 1)
+	if ( SwitchButton == 'r')
 		{
 
 			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_14);
 		}
-	if ( SwitchButton == 2 )
+	else if ( SwitchButton == 'l' )
 	{
 
-			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_15);
 	}
 }
 /****************************************************************************************************
@@ -157,11 +278,7 @@ void LC_HeadLampStatus(int Button_2)
  * 																									*
  * @Note			   - LED_3, Lamp_3 & Lamp_4 are connected in parallel to PC13																			*
  ***************************************************************************************************/
-void LC_PuddleLightStatus(int Button_x)
+void LC_PuddleLightStatus(void)
 {
-	if (Button_x == 1)
-			{
 
-				GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
-			}
 }

@@ -8,15 +8,11 @@
 #ifndef POWERWINDOW_H_
 #define POWERWINDOW_H_
 
-void RapidUpDriverBtn(void);
-void RapidDownDriverBtn(void);
-void RapidUpFrontLeftBtn(void);
-void RapidDownFrontLeftBtn(void);
-void RapidUpRearLeftBtn(void);
-void RapidDownRearLeftBtn(void);
-void RapidUpRearRightBtn(void);
-void RapidDownRearRightBtn(void);
-void PowerWindowBtnInit(GPIO_RegDef_t*, int);
+
+void GPIO_PW_Output_Init(void);
+void GPIO_PW_Input_Init(void);
+
+
 void AntiPinch(void);
 void Start_BLDC_Motor_CCW(void);
 void Start_BLDC_Motor_CW(void);

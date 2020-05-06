@@ -69,7 +69,18 @@
 #define AHB1PERIPH_BASEADDR 				0x40020000U
 #define AHB2PERIPH_BASEADDR 				0x50000000U
 
-
+#define TIM2_BASE             				(APB1PERIPH_BASEADDR + 0x0000U)
+#define TIM3_BASE             				(APB1PERIPH_BASEADDR + 0x0400U)
+#define TIM4_BASE             				(APB1PERIPH_BASEADDR + 0x0800U)
+#define TIM5_BASE             				(APB1PERIPH_BASEADDR + 0x0C00U)
+#define TIM6_BASE             				(APB1PERIPH_BASEADDR + 0x1000U)
+#define TIM7_BASE             				(APB1PERIPH_BASEADDR + 0x1400U)
+#define TIM12_BASE            				(APB1PERIPH_BASEADDR + 0x1800U)
+#define TIM13_BASE            				(APB1PERIPH_BASEADDR + 0x1C00U)
+#define TIM14_BASE            				(APB1PERIPH_BASEADDR + 0x2000U)
+#define RTC_BASE              				(APB1PERIPH_BASEADDR + 0x2800U)
+#define WWDG_BASE             				(APB1PERIPH_BASEADDR + 0x2C00U)
+#define IWDG_BASE             				(APB1PERIPH_BASEADDR + 0x3000U)
 /*
  * Base Addresses of GPIOx
  */
@@ -119,6 +130,21 @@
 //#define UART7_BASEADDR 					(APB1PERIPH_BASEADDR + 0x7800)
 //#define UART8_BASEADDR 					(APB1PERIPH_BASEADDR + 0x7C00)
 
+/** @addtogroup Peripheral_declaration
+  * @{
+  */
+#define TIM2                ((TIM_TypeDef *) TIM2_BASE)
+#define TIM3                ((TIM_TypeDef *) TIM3_BASE)
+#define TIM4                ((TIM_TypeDef *) TIM4_BASE)
+#define TIM5                ((TIM_TypeDef *) TIM5_BASE)
+#define TIM6                ((TIM_TypeDef *) TIM6_BASE)
+#define TIM7                ((TIM_TypeDef *) TIM7_BASE)
+#define TIM12               ((TIM_TypeDef *) TIM12_BASE)
+#define TIM13               ((TIM_TypeDef *) TIM13_BASE)
+#define TIM14               ((TIM_TypeDef *) TIM14_BASE)
+#define RTC                 ((RTC_TypeDef *) RTC_BASE)
+#define WWDG                ((WWDG_TypeDef *) WWDG_BASE)
+#define IWDG                ((IWDG_TypeDef *) IWDG_BASE)
 /*
  * Base Address of Reset and Clock Control
  */
@@ -234,6 +260,56 @@ typedef struct
 }I2C_RegDef_t;
 
 
+/**
+  * @brief TIM
+  */
+
+typedef struct
+{
+  __vo uint32_t CR1;         /*!< TIM control register 1,              Address offset: 0x00 */
+  __vo uint32_t CR2;         /*!< TIM control register 2,              Address offset: 0x04 */
+  __vo uint32_t SMCR;        /*!< TIM slave mode control register,     Address offset: 0x08 */
+  __vo uint32_t DIER;        /*!< TIM DMA/interrupt enable register,   Address offset: 0x0C */
+  __vo uint32_t SR;          /*!< TIM status register,                 Address offset: 0x10 */
+  __vo uint32_t EGR;         /*!< TIM event generation register,       Address offset: 0x14 */
+  __vo uint32_t CCMR1;       /*!< TIM capture/compare mode register 1, Address offset: 0x18 */
+  __vo uint32_t CCMR2;       /*!< TIM capture/compare mode register 2, Address offset: 0x1C */
+  __vo uint32_t CCER;        /*!< TIM capture/compare enable register, Address offset: 0x20 */
+  __vo uint32_t CNT;         /*!< TIM counter register,                Address offset: 0x24 */
+  __vo uint32_t PSC;         /*!< TIM prescaler,                       Address offset: 0x28 */
+  __vo uint32_t ARR;         /*!< TIM auto-reload register,            Address offset: 0x2C */
+  __vo uint32_t RCR;         /*!< TIM repetition counter register,     Address offset: 0x30 */
+  __vo uint32_t CCR1;        /*!< TIM capture/compare register 1,      Address offset: 0x34 */
+  __vo uint32_t CCR2;        /*!< TIM capture/compare register 2,      Address offset: 0x38 */
+  __vo uint32_t CCR3;        /*!< TIM capture/compare register 3,      Address offset: 0x3C */
+  __vo uint32_t CCR4;        /*!< TIM capture/compare register 4,      Address offset: 0x40 */
+  __vo uint32_t BDTR;        /*!< TIM break and dead-time register,    Address offset: 0x44 */
+  __vo uint32_t DCR;         /*!< TIM DMA control register,            Address offset: 0x48 */
+  __vo uint32_t DMAR;        /*!< TIM DMA address for full transfer,   Address offset: 0x4C */
+  __vo uint32_t OR;          /*!< TIM option register,                 Address offset: 0x50 */
+} TIM_TypeDef;
+
+/**
+  * @brief DMA Controller
+  */
+
+typedef struct
+{
+  __vo uint32_t CR;     /*!< DMA stream x configuration register      */
+  __vo uint32_t NDTR;   /*!< DMA stream x number of data register     */
+  __vo uint32_t PAR;    /*!< DMA stream x peripheral address register */
+  __vo uint32_t M0AR;   /*!< DMA stream x memory 0 address register   */
+  __vo uint32_t M1AR;   /*!< DMA stream x memory 1 address register   */
+  __vo uint32_t FCR;    /*!< DMA stream x FIFO control register       */
+} DMA_Stream_TypeDef;
+
+typedef struct
+{
+  __vo uint32_t LISR;   /*!< DMA low interrupt status register,      Address offset: 0x00 */
+  __vo uint32_t HISR;   /*!< DMA high interrupt status register,     Address offset: 0x04 */
+  __vo uint32_t LIFCR;  /*!< DMA low interrupt flag clear register,  Address offset: 0x08 */
+  __vo uint32_t HIFCR;  /*!< DMA high interrupt flag clear register, Address offset: 0x0C */
+} DMA_TypeDef;
 /*
  *		Peripheral definitions of GPIOx
  */

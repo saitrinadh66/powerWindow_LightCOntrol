@@ -8,28 +8,8 @@
 
 
 
-
 /****************************************************************************************************
- * @fn 				   - RapidUpDriverBtn															*
- * 																									*
- * @brief			   -   																			*
- * 																									*
- * @param[in]		   - 																			*
- * 																									*
- * @return			   - None																		*
- * 																									*
- * @Note			   -																			*
- ***************************************************************************************************/
-void RapidUpDriverBtn(void)
-{
-	PowerWindowBtnInit(GPIOA, GPIO_PIN_NO_0);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI0,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI0,ENABLE);
-}
-
-/****************************************************************************************************
- * @fn 				   - RapidDownDriverBtn															*
+ * @fn 				   - GPIO_PW_Output_Init																	*
  * 																									*
  * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
@@ -39,17 +19,37 @@ void RapidUpDriverBtn(void)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void RapidDownDriverBtn(void)
+void GPIO_PW_Output_Init(void)
 {
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_8);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI9_5,ENABLE);
+	GPIO_Handle_t GPIO_PW_Output;
+	GPIO_PW_Output.pGPIOx = GPIOB;
+	// various register configuration
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_14;
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
+	GPIO_Init(&GPIO_PW_Output);
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_15;
+	GPIO_Init(&GPIO_PW_Output);
+
+	GPIO_PW_Output.pGPIOx = GPIOC;
+
+	// various register configuration
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_8;
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_PW_Output);
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_9;
+	GPIO_Init(&GPIO_PW_Output);
 }
 
 /****************************************************************************************************
- * @fn 				   - RapidUpFrontLeftBtn														*
+ * @fn 				   - GPIO_PW_Input_Init																*
  * 																									*
  * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
@@ -59,112 +59,46 @@ void RapidDownDriverBtn(void)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void RapidUpFrontLeftBtn(void)
+void GPIO_PW_Input_Init(void)
 {
-	PowerWindowBtnInit(GPIOG, GPIO_PIN_NO_5);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI9_5,ENABLE);
+	GPIO_Handle_t GPIO_PW_Input;
+	GPIO_PW_Input.pGPIOx = GPIOE;
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_7; // used for RapidUpDriver
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinMode			= GPIO_MODE_IN_FT;
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PU;
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinSpeed 		= GPIO_SPEED_FAST;
+
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_8; // used for RapidDownDriver
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_9; // used for FrontLeftUp
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_10; // used for FrontLeftDown
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_11; // used for RearLeftUp
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_12; // used for RearLeftDown
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_13; // used for RearRightUp
+	GPIO_Init(&GPIO_PW_Input);
+
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_14; // used for RearRightDown
+	GPIO_Init(&GPIO_PW_Input);
+
+
+	GPIO_IRQPriorityConfig(IRQ_NO_EXTI9_5, NVIC_IRQ_PRI15);  // IRQ configuring for EXTI5 - EXTI9
+	GPIO_IRQInterruptConfig(IRQ_NO_EXTI9_5, ENABLE);		// Setting Priority for EXT5 - EXTI9
+
+	GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10, NVIC_IRQ_PRI15); // IRQ configuring for EXTI10 - EXTI15
+	GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10, ENABLE);		// Setting Priority for EXT10 - EXTI15
 }
 
-/****************************************************************************************************
- * @fn 				   - RapidDownFrontLeftBtn														*
- * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
- * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * 																									*
- * @return			   - None																		*
- * 																									*
- * @Note			   -																			*
- ***************************************************************************************************/
-void RapidDownFrontLeftBtn(void)
-{
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_10);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10,ENABLE);
-
-}
-
-/****************************************************************************************************
- * @fn 				   - RapidUpRearLeftBtn															*
- * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
- * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * 																									*
- * @return			   - None																		*
- * 																									*
- * @Note			   -																			*
- ***************************************************************************************************/
-void RapidUpRearLeftBtn(void)
-{
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_11);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10,ENABLE);
-
-}
-/****************************************************************************************************
- * @fn 				   - RapidDownRearLeftBtn														*
- * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
- * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * 																									*
- * @return			   - None																		*
- * 																									*
- * @Note			   -																			*
- ***************************************************************************************************/
-void RapidDownRearLeftBtn(void)
-{
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_12);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10,ENABLE);
-
-}
-
-/****************************************************************************************************
- * @fn 				   - RapidUpRearRightBtn														*
- * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
- * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * 																									*
- * @return			   - None																		*
- * 																									*
- * @Note			   -																			*
- ***************************************************************************************************/
-void RapidUpRearRightBtn(void)
-{
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_13);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10,ENABLE);
-
-}
-
-/****************************************************************************************************
- * @fn 				   - RapidDownRearRightBtn														*
- * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
- * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
- * 																									*
- * @return			   - None																		*
- * 																									*
- * @Note			   -																			*
- ***************************************************************************************************/
-void RapidDownRearRightBtn(void)
-{
-	PowerWindowBtnInit(GPIOE, GPIO_PIN_NO_14);
-	//IRQ configurations
-	GPIO_IRQPriorityConfig(IRQ_NO_EXTI15_10,NVIC_IRQ_PRI15);
-	GPIO_IRQInterruptConfig(IRQ_NO_EXTI15_10,ENABLE);
-
-}
 /****************************************************************************************************
  * @fn 				   - AntiPinch																	*
  * 																									*
@@ -182,7 +116,7 @@ void AntiPinch(void)
 }
 
 /****************************************************************************************************
- * @fn 				   - Start_BLDC_Motor_CW															*
+ * @fn 				   - Start_BLDC_Motor_UP															*
  * 																									*
  * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
@@ -192,15 +126,15 @@ void AntiPinch(void)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void Start_BLDC_Motor_CW(void)
+void Start_BLDC_Motor_UP(void)
 {
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_0, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_1, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_2, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_3, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_14, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_15, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_8, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_9, GPIO_PIN_RESET);
 }
 /****************************************************************************************************
- * @fn 				   - Start_BLDC_Motor_CCW															*
+ * @fn 				   - Start_BLDC_Motor_DOWN														*
  * 																									*
  * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
@@ -210,12 +144,12 @@ void Start_BLDC_Motor_CW(void)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void Start_BLDC_Motor_CCW(void)
+void Start_BLDC_Motor_DOWN(void)
 {
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_0, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_1, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_2, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_3, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_14, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_15, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_8, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_9, GPIO_PIN_RESET);
 }
 /****************************************************************************************************
  * @fn 				   - Stop_BLDC_Motor															*
@@ -230,10 +164,10 @@ void Start_BLDC_Motor_CCW(void)
  ***************************************************************************************************/
 void Stop_BLDC_Motor(void)
 {
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_0, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_1, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_2, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOE, GPIO_PIN_NO_3, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_14, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_15, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_8, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_9, GPIO_PIN_RESET);
 }
 /****************************************************************************************************
  * @fn 				   - IsWindowFullyOpen															*
@@ -275,21 +209,6 @@ void IsWindowFulluClose(void)
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void PowerWindowBtnInit(GPIO_RegDef_t *pGPIOx, int PinNumber)
-{
-
-	GPIO_Handle_t GPIOBtn;
-	memset(&GPIOBtn,0,sizeof(GPIOBtn));
-	GPIOBtn.pGPIOx = pGPIOx;
-	GPIOBtn.GPIO_PinConfig.GPIO_PinNumber = PinNumber;
-	GPIOBtn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN_FT;
-	GPIOBtn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
-	GPIOBtn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PD;
-
-	GPIO_PCLK_Control(pGPIOx, ENABLE);
-
-	GPIO_Init(&GPIOBtn);
-}
 void Motor_GPIO_Init()
 {
 	GPIO_Handle_t GPIO_Motor1_CCW;
@@ -297,7 +216,7 @@ void Motor_GPIO_Init()
 	GPIO_Handle_t GPIO_Motor2_CCW;
 	GPIO_Handle_t GPIO_Motor2_CW;
 
-	GPIO_Motor1_CCW.pGPIOx = GPIOE;
+	GPIO_Motor1_CCW.pGPIOx = GPIOB;
 	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;
 	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
 	GPIO_Motor1_CCW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
@@ -306,7 +225,7 @@ void Motor_GPIO_Init()
 	GPIO_PCLK_Control(GPIOE, ENABLE);
 	GPIO_Init(&GPIO_Motor1_CCW);
 
-	GPIO_Motor1_CW.pGPIOx = GPIOE;
+	GPIO_Motor1_CW.pGPIOx = GPIOB;
 	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
 	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT;
 	GPIO_Motor1_CW.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;

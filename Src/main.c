@@ -14,9 +14,7 @@
 
 #include"main.h"
 
-#define HIGH 					1
-#define BTN_PRESSED 			LOW
-static void GPIO_InOut_Init(void);
+
 void delay(void)
 {
 	for(uint32_t i = 0; i < 500000; i++);
@@ -24,57 +22,79 @@ void delay(void)
 
 int main(void)
 {
-	RapidUpFrontLeftBtn();
-	RapidUpDriverBtn();
-	while(1);
+	PCLK_Enable();
+	GPIO_PW_Output_Init();
+	GPIO_LC_Output_Init();
+	GPIO_PW_Input_Init();
+	GPIO_LC_Input_Init();
+
+	while(1)
 	{
-		LC_GlobeBoxStatus(1);
+
 	}
 }
-static void GPIO_InOut_Init(void)
-{
-	GPIO_Handle_t GPIO_InStruct;
-	/*GPIO ports clock enable*/
-	GPIO_PCLK_Control(GPIOG, ENABLE);
-	GPIO_PCLK_Control(GPIOD, ENABLE);
-	GPIO_PCLK_Control(GPIOC, ENABLE);
 
-	/*Configuring GPIO pin: PD12 PD13 PD14 PD15 */
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinNumber 	 = GPIO_PIN_NO_12|GPIO_PIN_NO_13|GPIO_PIN_NO_14|GPIO_PIN_NO_15;
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinMode 		 = GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinSpeed 		 = GPIO_SPEED_FAST;  // Fast Speed is Selected
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinOPType 	 = GPIO_OUT_TYPE_PP;  // Push Pull Configuration
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;    // No Pull Up or No Pull Down
-	GPIO_Init(GPIOD,&GPIO_InStruct);
+=======
 
-	/*Configuring GPIO pin: PC12 PC13 PC14 PC15 */
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinNumber 	 = GPIO_PIN_NO_12|GPIO_PIN_NO_13|GPIO_PIN_NO_14|GPIO_PIN_NO_15;
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinMode 		 = GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinSpeed  	 = GPIO_SPEED_FAST;  // Fast Speed is Selected
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinOPType 	 = GPIO_OUT_TYPE_PP;  // Push Pull Configuration
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;    // No Pull Up or No Pull Down
-	GPIO_Init(GPIOC,&GPIO_InStruct);
-
-
-	/*Configuring GPIO pin: PD0 PD1 PD2 PD3 PD4 PD5 PD6 PD7 */
-		GPIO_InStruct.GPIO_PinConfig.GPIO_PinNumber 	= GPIO_PIN_NO_0|GPIO_PIN_NO_1|GPIO_PIN_NO_2|GPIO_PIN_NO_3|GPIO_PIN_NO_4|GPIO_PIN_NO_5|GPIO_PIN_NO_6|GPIO_PIN_NO_7;
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_INPUT;  // GPIO output mode is configured as Output
-	//GPIO_Input.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-	//GPIO_Input.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
-	GPIO_Init(GPIOD,&GPIO_InStruct);
-}
 void EXTI9_5_IRQHandler(void)
 {
-    //delay(); //200ms . wait till button de-bouncing gets over
-	GPIO_IRQHandling(GPIO_PIN_NO_5); //clear the pending event from exti line
-	LC_HeadLampStatus(1);
+  	if(EXTI->PR & (1 << GPIO_PIN_NO_7))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_7);
+		LC_GlobeBoxStatus();
+		//clear the pending event from exti line
+	}
+	if(EXTI->PR & (1 << GPIO_PIN_NO_8))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_8);
+		LC_FogLightStatus();
+		 //clear the pending event from exti line
+	}
+	if(EXTI->PR & (1 << GPIO_PIN_NO_9))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_9);
+		LC_FogLightStatus();
+		//clear the pending event from exti line
+	}
 }
-
-void EXTI0_IRQHandler(void)
+void EXTI15_10_IRQHandler(void)
 {
-    //delay(); //200ms . wait till button de-bouncing gets over
-	GPIO_IRQHandling(GPIO_PIN_NO_0); //clear the pending event from exti line
-	LC_ReadingLight(2);
+	if(EXTI->PR & (1 << GPIO_PIN_NO_10))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_10);
+		LC_GlobeBoxStatus();
+		//clear the pending event from exti line
+	}
+	if(EXTI->PR & (1 << GPIO_PIN_NO_11))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_10);
+		LC_FogLightStatus();
+		 //clear the pending event from exti line
+	}
+	if(EXTI->PR & (1 << GPIO_PIN_NO_12))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_12);
+		LC_FogLightStatus();
+			//clear the pending event from exti line
+	}
+	if(EXTI->PR & (1 << GPIO_PIN_NO_13))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_13);
+		LC_FogLightStatus();
+		//clear the pending event from exti line
+	}
+	if(EXTI->PR & (1 << GPIO_PIN_NO_14))
+	{
+		GPIO_IRQHandling(GPIO_PIN_NO_14);
+		LC_FogLightStatus();
+		//clear the pending event from exti line
+	}
 }
-
+void PCLK_Enable(void)
+{
+	GPIO_PCLK_Control(GPIOA, ENABLE);
+	GPIO_PCLK_Control(GPIOB, ENABLE);
+	GPIO_PCLK_Control(GPIOC, ENABLE);
+	GPIO_PCLK_Control(GPIOD, ENABLE);
+	GPIO_PCLK_Control(GPIOE, ENABLE);
+}
