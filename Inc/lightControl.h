@@ -11,13 +11,19 @@
 #include"STM32F429xx.h"
 #include"GPIOx_Drivers.h"
 
-void LC_GlobeBoxStatus();
-void LC_BootSpaceStatus();
-void LC_ReadingLight(int);
-void LC_IndicatorStatus();
-void LC_FogLightStatus();
-void LC_HeadLampStatus();
-void LC_PuddleLightStatus();
-void LC_SvigelLightStatus();
+GPIO_LC_Input_Init();
+GPIO_LC_Output_Init();
+
+// LED status functions
+
+void LC_GlobeBoxStatus(void);
+void LC_BootSpaceStatus(void);
+void LC_ReadingLight(char);
+void LC_IndicatorStatus(char);
+void LC_FogLightStatus(void);
+void LC_HeadLampStatus(void);
+void LC_PuddleLightStatus(void);
+void LC_SvigelLightStatus(void);
+
 
 #endif /* LIGHTCONTROL_H_ */
