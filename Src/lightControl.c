@@ -168,6 +168,7 @@ void LC_ReadingLight(char Switch)
 		}
 	if ( Switch == 'r')  // rear reading light
 	{
+
 			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_14);
 	}
 }
@@ -186,7 +187,7 @@ void LC_ReadingLight(char Switch)
  ***************************************************************************************************/
 void LC_BootSpaceStatus(void)
 {
-	GPIO_ToggleOutputPin(GPIOD, GPIO_PIN_NO_12);
+
 }
 /****************************************************************************************************
  * @fn 				   - LC_GloveBox															*
@@ -203,7 +204,7 @@ void LC_BootSpaceStatus(void)
  ***************************************************************************************************/
 void LC_GlobeBoxStatus(void)
 {
-	GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_13);
+
 }
 /****************************************************************************************************
  * @fn 				   - LC_FogLamps															*
@@ -220,7 +221,6 @@ void LC_GlobeBoxStatus(void)
  ***************************************************************************************************/
 void LC_FogLightStatus(void)
 {
-	GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_14);
 }
 /****************************************************************************************************
  * @fn 				   - LC_HeadLamps															*
@@ -237,7 +237,7 @@ void LC_FogLightStatus(void)
  ***************************************************************************************************/
 void LC_HeadLampStatus(void)
 {
-	GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_13);
+
 }
 /****************************************************************************************************
  * @fn 				   - LC_TurningIndicators															*
@@ -257,11 +257,12 @@ void LC_TurningIndicators(char SwitchButton)
 {
 	if ( SwitchButton == 'r')
 		{
+
 			GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_14);
 		}
 	else if ( SwitchButton == 'l' )
 	{
-			GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
+
 	}
 }
 /****************************************************************************************************
@@ -279,5 +280,5 @@ void LC_TurningIndicators(char SwitchButton)
  ***************************************************************************************************/
 void LC_PuddleLightStatus(void)
 {
-	GPIO_ToggleOutputPin(GPIOG, GPIO_PIN_NO_15);
+
 }
