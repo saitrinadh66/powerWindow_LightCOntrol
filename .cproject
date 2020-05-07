@@ -114,7 +114,7 @@
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
-						<entry excluding="main.c|SPI_Tx_Testing.c|SPI_CMD_Handling_IT.c|SPI_CMD_Handling.c|I2C_Slave_Tx_String2.c|I2C_Slave_Tx_String.c|I2C_Master_Tx_Testing.c|I2C_Master_Rx_Testing.c|I2C_Master_Rx_Testing_IT.c|014i2c_slave_tx_string2.c|013i2c_slave_tx_string.c|012i2c_master_rx_testingIT.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|009spi_cmd_handling_it.c|008spi_cmd_handling.c|007spi_txonly_arduino.c|006spi_tx_testing.c|msp.c|it.c|timer.c|test.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="SPI_TxOnly_Arduino.c|SPI_Tx_Testing.c|SPI_CMD_Handling_IT.c|SPI_CMD_Handling.c|I2C_Slave_Tx_String2.c|I2C_Slave_Tx_String.c|I2C_Master_Tx_Testing.c|I2C_Master_Rx_Testing.c|I2C_Master_Rx_Testing_IT.c|014i2c_slave_tx_string2.c|013i2c_slave_tx_string.c|012i2c_master_rx_testingIT.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|009spi_cmd_handling_it.c|008spi_cmd_handling.c|007spi_txonly_arduino.c|006spi_tx_testing.c|msp.c|it.c|timer.c|test.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
 					</sourceEntries>
 				</configuration>
