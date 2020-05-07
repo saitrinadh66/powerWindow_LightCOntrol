@@ -153,7 +153,7 @@ void Start_BLDC_Motor_Up_Driver(void)
 }
 
 /****************************************************************************************************
- * @fn 				   - Start_BLDC_Motor_UP_Driver													*
+ * @fn 				   - Start_BLDC_Motor_Down_Driver													*
  * 																									*
  * @brief			   - 																			*
  * 																									*
