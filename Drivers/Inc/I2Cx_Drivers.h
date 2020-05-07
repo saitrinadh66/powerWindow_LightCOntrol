@@ -8,7 +8,6 @@
 #ifndef INC_I2CX_DRIVERS_H_
 #define INC_I2CX_DRIVERS_H_
 
-
 #include "STM32F429xx.h"
 
 /*
@@ -158,6 +157,5 @@ void I2C_SlaveEnableDisableCallbackEvents(I2C_RegDef_t *pI2Cx,uint8_t EnorDi);
  * Application callback
  */
 void I2C_ApplicationEventCallback(I2C_Handle_t *pI2CHandle,uint8_t AppEv);
-
 
 #endif /* INC_I2CX_DRIVERS_H_ */

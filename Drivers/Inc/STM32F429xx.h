@@ -511,6 +511,8 @@ typedef struct
 #define GPIO_PIN_RESET			RESET
 #define FLAG_RESET         		RESET
 #define FLAG_SET 				SET
+#define HIGH 					SET
+#define LOW 					RESET
 
 
 /************************************************************************************************************
@@ -647,7 +649,5 @@ typedef struct
 #define IRQ_NO_EXTI4						10
 #define IRQ_NO_EXTI9_5						23
 #define IRQ_NO_EXTI15_10					40
-
-
 
 #endif /* INC_STM32F429XX_H_ */

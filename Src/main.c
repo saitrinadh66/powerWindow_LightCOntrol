@@ -12,13 +12,13 @@
 #endif
 
 
-#include"main.h"
+#include "main.h"
+
+void SystemClockConfig(void);
+void TIMER6_Init(void);
+void Error_handler(void);
 
 
-void delay(void)
-{
-	for(uint32_t i = 0; i < 500000; i++);
-}
 
 int main(void)
 {
@@ -27,10 +27,9 @@ int main(void)
 	GPIO_LC_Output_Init();
 	GPIO_PW_Input_Init();
 	GPIO_LC_Input_Init();
-
 	while(1)
 	{
-
+		GPIO_LC_Operations();
 	}
 }
 
@@ -38,56 +37,56 @@ int main(void)
 
 void EXTI9_5_IRQHandler(void)
 {
-  	if(EXTI->PR & (1 << GPIO_PIN_NO_7))
+  	if(EXTI->PR & (1 << RapidUpDriverBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_7);
-		LC_GlobeBoxStatus();
+		GPIO_IRQHandling(RapidUpDriverBtn);
+		Start_BLDC_Motor_Up_Driver();
 		//clear the pending event from exti line
 	}
-	if(EXTI->PR & (1 << GPIO_PIN_NO_8))
+	if(EXTI->PR & (1 << RapidDownDriverBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_8);
-		LC_FogLightStatus();
+		GPIO_IRQHandling(RapidDownDriverBtn);
 		 //clear the pending event from exti line
+		Start_BLDC_Motor_Down_Driver();
 	}
-	if(EXTI->PR & (1 << GPIO_PIN_NO_9))
+	if(EXTI->PR & (1 << RapidUpFrontLeftBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_9);
-		LC_FogLightStatus();
+		GPIO_IRQHandling(RapidUpFrontLeftBtn);
 		//clear the pending event from exti line
+		Start_BLDC_Motor_Up_FrontLeft();
 	}
 }
 void EXTI15_10_IRQHandler(void)
 {
-	if(EXTI->PR & (1 << GPIO_PIN_NO_10))
+	if(EXTI->PR & (1 << RapidDownFrontLeftBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_10);
-		LC_GlobeBoxStatus();
+		GPIO_IRQHandling(RapidDownFrontLeftBtn);
 		//clear the pending event from exti line
+		Start_BLDC_Motor_Down_FrontLeft();
 	}
-	if(EXTI->PR & (1 << GPIO_PIN_NO_11))
+	if(EXTI->PR & (1 << RapidUpRearRightBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_10);
-		LC_FogLightStatus();
+		GPIO_IRQHandling(RapidUpRearRightBtn);
 		 //clear the pending event from exti line
+		Start_BLDC_Motor_Up_RearRight();
 	}
-	if(EXTI->PR & (1 << GPIO_PIN_NO_12))
+	if(EXTI->PR & (1 << RapidDownRearRightBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_12);
-		LC_FogLightStatus();
+		GPIO_IRQHandling(RapidDownRearRightBtn);
 			//clear the pending event from exti line
+		Start_BLDC_Motor_Down_RearRight();
 	}
-	if(EXTI->PR & (1 << GPIO_PIN_NO_13))
+	if(EXTI->PR & (1 << RapidUpRearLeftBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_13);
-		LC_FogLightStatus();
+		GPIO_IRQHandling(RapidUpRearLeftBtn);
 		//clear the pending event from exti line
+		Start_BLDC_Motor_Up_RearLeft();
 	}
-	if(EXTI->PR & (1 << GPIO_PIN_NO_14))
+	if(EXTI->PR & (1 << RapidDownRearLeftBtn))
 	{
-		GPIO_IRQHandling(GPIO_PIN_NO_14);
-		LC_FogLightStatus();
+		GPIO_IRQHandling(RapidDownRearLeftBtn);
 		//clear the pending event from exti line
+		Start_BLDC_Motor_Down_RearLeft();
 	}
 }
 void PCLK_Enable(void)
@@ -98,3 +97,4 @@ void PCLK_Enable(void)
 	GPIO_PCLK_Control(GPIOD, ENABLE);
 	GPIO_PCLK_Control(GPIOE, ENABLE);
 }
+

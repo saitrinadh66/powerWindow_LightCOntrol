@@ -20,4 +20,5 @@ uint32_t RCC_GetPCLK2Value(void);
 
 
 uint32_t  RCC_GetPLLOutputClock(void);
+
 #endif /* INC_RCC_DRIVERS_H_ */
