@@ -11,7 +11,6 @@
 #include<string.h>
 #include"STM32F429xx.h"
 #include"SPIx_Drivers.h"
-#include"I2Cx_Drivers.h"
 #include"GPIOx_Drivers.h"
 #include"PowerWindow.h"
 #include"LightControl.h"
