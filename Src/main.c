@@ -14,11 +14,6 @@
 
 #include "main.h"
 
-void SystemClockConfig(void);
-void TIMER6_Init(void);
-void Error_handler(void);
-
-
 
 int main(void)
 {
@@ -32,8 +27,6 @@ int main(void)
 		GPIO_LC_Operations();
 	}
 }
-
-=======
 
 void EXTI9_5_IRQHandler(void)
 {
