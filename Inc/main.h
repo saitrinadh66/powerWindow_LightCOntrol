@@ -9,12 +9,10 @@
 #define MAIN_H_
 
 #include<string.h>
-#include"LightControl.h"
-#include"PowerWindow.h"
-#include"GPIOx_Drivers.h"
-#include"I2Cx_Drivers.h"
-#include"CANx_Drivers.h"
 #include"STM32F429xx.h"
+#include"GPIOx_Drivers.h"
+#include"PowerWindow.h"
+#include"LightControl.h"
 
 void PCLK_Enable(void);
 

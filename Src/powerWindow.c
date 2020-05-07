@@ -9,7 +9,7 @@
 
 
 /****************************************************************************************************
- * @fn 				   - GPIO_PW_Output_Init																	*
+ * @fn 				   - GPIO_PW_Output_Init														*
  * 																									*
  * @brief			   - this Function De-initialize the given GPIO port  							*
  * 																									*
@@ -24,27 +24,46 @@ void GPIO_PW_Output_Init(void)
 	GPIO_Handle_t GPIO_PW_Output;
 	GPIO_PW_Output.pGPIOx = GPIOB;
 	// various register configuration
-	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_14;
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_DriverSideOutput_1;
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
 	GPIO_Init(&GPIO_PW_Output);
-	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_15;
+
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_DriverSideOutput_2;
 	GPIO_Init(&GPIO_PW_Output);
+
+
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_FrontLeftSideOutput_1;
+	GPIO_Init(&GPIO_PW_Output);
+
+
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_FrontLeftSideOutput_2;
+	GPIO_Init(&GPIO_PW_Output);
+
 
 	GPIO_PW_Output.pGPIOx = GPIOC;
 
 	// various register configuration
-	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_8;
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_RearLeftSideOutput_1;
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
 	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
 
 	GPIO_Init(&GPIO_PW_Output);
-	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_9;
+
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_RearLeftSideOutput_2;
+	GPIO_Init(&GPIO_PW_Output);
+
+
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_RearRightSideOutput_1;
+	GPIO_Init(&GPIO_PW_Output);
+
+
+	GPIO_PW_Output.GPIO_PinConfig.GPIO_PinNumber 		= BLDC_RearRightSideOutput_2;
 	GPIO_Init(&GPIO_PW_Output);
 }
 
@@ -63,32 +82,32 @@ void GPIO_PW_Input_Init(void)
 {
 	GPIO_Handle_t GPIO_PW_Input;
 	GPIO_PW_Input.pGPIOx = GPIOE;
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_7; // used for RapidUpDriver
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidUpDriverBtn; // used for RapidUpDriver
 	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinMode			= GPIO_MODE_IN_FT;
 	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PU;
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinSpeed 		= GPIO_SPEED_FAST;
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinSpeed 			= GPIO_SPEED_FAST;
 
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_8; // used for RapidDownDriver
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidDownDriverBtn; // used for RapidDownDriver
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_9; // used for FrontLeftUp
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidUpFrontLeftBtn; // used for FrontLeftUp
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_10; // used for FrontLeftDown
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidDownFrontLeftBtn; // used for FrontLeftDown
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_11; // used for RearLeftUp
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidUpRearRightBtn; // used for RearLeftUp
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_12; // used for RearLeftDown
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidDownRearRightBtn; // used for RearLeftDown
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_13; // used for RearRightUp
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidUpRearLeftBtn; // used for RearRightUp
 	GPIO_Init(&GPIO_PW_Input);
 
-	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= GPIO_PIN_NO_14; // used for RearRightDown
+	GPIO_PW_Input.GPIO_PinConfig.GPIO_PinNumber 		= RapidDownRearLeftBtn; // used for RearRightDown
 	GPIO_Init(&GPIO_PW_Input);
 
 
@@ -116,59 +135,221 @@ void AntiPinch(void)
 }
 
 /****************************************************************************************************
- * @fn 				   - Start_BLDC_Motor_UP															*
+ * @fn 				   - Start_BLDC_Motor_Up_Driver													*
  * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
+ * @brief			   - 								*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
+ * @param[in]		   - none																		*
  * 																									*
  * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void Start_BLDC_Motor_UP(void)
+void Start_BLDC_Motor_Up_Driver(void)
 {
-	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_14, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_15, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_8, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_9, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_1, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_2, GPIO_PIN_RESET);
+
 }
+
 /****************************************************************************************************
- * @fn 				   - Start_BLDC_Motor_DOWN														*
+ * @fn 				   - Start_BLDC_Motor_UP_Driver													*
  * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
+ * @brief			   - 																			*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
+ * @param[in]		   - none																		*
  * 																									*
  * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void Start_BLDC_Motor_DOWN(void)
+void Start_BLDC_Motor_Down_Driver(void)
 {
-	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_14, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_15, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_8, GPIO_PIN_SET);
-	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_9, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_2, GPIO_PIN_SET);
+
 }
+
 /****************************************************************************************************
- * @fn 				   - Stop_BLDC_Motor															*
+ * @fn 				   - Stop_BLDC_Motor_Driver														*
  * 																									*
- * @brief			   - this Function De-initialize the given GPIO port  							*
+ * @brief			   - 								*
  * 																									*
- * @param[in]		   - base address of the GPIO peripheral										*
+ * @param[in]		   - none																		*
  * 																									*
  * @return			   - None																		*
  * 																									*
  * @Note			   -																			*
  ***************************************************************************************************/
-void Stop_BLDC_Motor(void)
+void Stop_BLDC_Motor_Driver(void)
 {
-	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_14, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOB, GPIO_PIN_NO_15, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_8, GPIO_PIN_RESET);
-	GPIO_WriteToOutputPin(GPIOC, GPIO_PIN_NO_9, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_2, GPIO_PIN_RESET);
+
 }
+
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_Up_FrontLeft												*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_Up_FrontLeft(void)
+{
+	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_1, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_2, GPIO_PIN_RESET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_Down_FrontLeft											*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_Down_FrontLeft(void)
+{
+	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_2, GPIO_PIN_SET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Stop_BLDC_Motor_FrontLeft													*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Stop_BLDC_Motor_FrontLeft(void)
+{
+	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_2, GPIO_PIN_RESET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_Up_RearRight												*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_Up_RearRight(void)
+{
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_1, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_2, GPIO_PIN_RESET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_UP_Driver													*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_Down_RearRight(void)
+{
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_2, GPIO_PIN_SET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Stop_BLDC_Motor_RearRight													*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Stop_BLDC_Motor_RearRight(void)
+{
+	GPIO_WriteToOutputPin(GPIOB, BLDC_RearRightSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_RearRightSideOutput_2, GPIO_PIN_RESET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_Up_RearLeft												*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_Up_RearLeft(void)
+{
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearLeftSideOutput_1, GPIO_PIN_SET);
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_2, GPIO_PIN_RESET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Start_BLDC_Motor_Down_RearLeft												*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Start_BLDC_Motor_Down_RearLeft(void)
+{
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearLeftSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOC, BLDC_RearLeftSideOutput_2, GPIO_PIN_SET);
+
+}
+
+/****************************************************************************************************
+ * @fn 				   - Stop_BLDC_Motor_RearLeft													*
+ * 																									*
+ * @brief			   - 								*
+ * 																									*
+ * @param[in]		   - none																		*
+ * 																									*
+ * @return			   - None																		*
+ * 																									*
+ * @Note			   -																			*
+ ***************************************************************************************************/
+void Stop_BLDC_Motor_RearLeft(void)
+{
+	GPIO_WriteToOutputPin(GPIOB, BLDC_RearLeftSideOutput_1, GPIO_PIN_RESET);
+	GPIO_WriteToOutputPin(GPIOB, BLDC_RearLeftSideOutput_2, GPIO_PIN_RESET);
+
+}
+
 /****************************************************************************************************
  * @fn 				   - IsWindowFullyOpen															*
  * 																									*

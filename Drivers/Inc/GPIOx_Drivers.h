@@ -144,5 +144,4 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority);
 void GPIO_IRQHandling(uint8_t PinNumber);
 
 
-
 #endif /* INC_GPIOX_DRIVERS_H_ */
