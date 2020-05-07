@@ -8,7 +8,7 @@
 #ifndef INC_I2CX_DRIVERS_H_
 #define INC_I2CX_DRIVERS_H_
 
-#include "STM32F429xx.h"
+#include "main.h"
 
 /*
  * Configuration structure for I2Cx peripheral
