@@ -205,6 +205,8 @@ void Start_BLDC_Motor_Up_Driver(void)
 {
 	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_1, GPIO_PIN_SET);
 	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_2, GPIO_PIN_RESET);
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_Driver();
 
 }
 
@@ -223,6 +225,8 @@ void Start_BLDC_Motor_Down_Driver(void)
 {
 	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_1, GPIO_PIN_RESET);
 	GPIO_WriteToOutputPin(GPIOB, BLDC_DriverSideOutput_2, GPIO_PIN_SET);
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_Driver();
 
 }
 
@@ -259,6 +263,8 @@ void Start_BLDC_Motor_Up_FrontLeft(void)
 {
 	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_1, GPIO_PIN_SET);
 	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_2, GPIO_PIN_RESET);
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_FrontLeft();
 
 }
 
@@ -277,6 +283,8 @@ void Start_BLDC_Motor_Down_FrontLeft(void)
 {
 	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_1, GPIO_PIN_RESET);
 	GPIO_WriteToOutputPin(GPIOB, BLDC_FrontLeftSideOutput_2, GPIO_PIN_SET);
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_FrontLeft();
 
 }
 
@@ -313,7 +321,8 @@ void Start_BLDC_Motor_Up_RearRight(void)
 {
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_1, GPIO_PIN_SET);
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_2, GPIO_PIN_RESET);
-
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_RearRight();
 }
 
 /****************************************************************************************************
@@ -331,6 +340,8 @@ void Start_BLDC_Motor_Down_RearRight(void)
 {
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_1, GPIO_PIN_RESET);
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_2, GPIO_PIN_SET);
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_RearRight();
 
 }
 
@@ -367,6 +378,8 @@ void Start_BLDC_Motor_Up_RearLeft(void)
 {
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearLeftSideOutput_1, GPIO_PIN_SET);
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearRightSideOutput_2, GPIO_PIN_RESET);
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_RearLeft();
 
 }
 
@@ -385,7 +398,8 @@ void Start_BLDC_Motor_Down_RearLeft(void)
 {
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearLeftSideOutput_1, GPIO_PIN_RESET);
 	GPIO_WriteToOutputPin(GPIOC, BLDC_RearLeftSideOutput_2, GPIO_PIN_SET);
-
+	DelayMillis(3000); // let the run the motor for 3 seconds
+	Stop_BLDC_Motor_RearLeft();
 }
 
 /****************************************************************************************************
@@ -403,6 +417,7 @@ void Stop_BLDC_Motor_RearLeft(void)
 {
 	GPIO_WriteToOutputPin(GPIOB, BLDC_RearLeftSideOutput_1, GPIO_PIN_RESET);
 	GPIO_WriteToOutputPin(GPIOB, BLDC_RearLeftSideOutput_2, GPIO_PIN_RESET);
+
 
 }
 
