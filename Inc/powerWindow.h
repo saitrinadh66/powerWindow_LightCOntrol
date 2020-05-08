@@ -11,6 +11,9 @@
 
 
 
+#define AntiPinchECHO				GPIO_PIN_NO_11
+#define AntiPinchTRIG				GPIO_PIN_NO_12
+
 #define RapidUpDriverBtn 			GPIO_PIN_NO_7
 #define RapidDownDriverBtn 			GPIO_PIN_NO_8
 #define RapidUpFrontLeftBtn 		GPIO_PIN_NO_9
@@ -38,7 +41,7 @@
 void GPIO_PW_Output_Init(void);
 void GPIO_PW_Input_Init(void);
 
-
+void AntiPinch_GPIO_Init(void);
 void AntiPinch(void);
 
 void Start_BLDC_Motor_Up_Driver(void);

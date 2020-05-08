@@ -32,21 +32,24 @@ void EXTI9_5_IRQHandler(void)
 {
   	if(EXTI->PR & (1 << RapidUpDriverBtn))
 	{
-		GPIO_IRQHandling(RapidUpDriverBtn);
+		GPIO_IRQHandling(RapidUpDriverBtn);//clear the pending event from exti line
 		Start_BLDC_Motor_Up_Driver();
-		//clear the pending event from exti line
+		DelayMillis(3000); // let run the motor for 3 seconds
+
 	}
 	if(EXTI->PR & (1 << RapidDownDriverBtn))
 	{
 		GPIO_IRQHandling(RapidDownDriverBtn);
 		 //clear the pending event from exti line
 		Start_BLDC_Motor_Down_Driver();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 	if(EXTI->PR & (1 << RapidUpFrontLeftBtn))
 	{
 		GPIO_IRQHandling(RapidUpFrontLeftBtn);
 		//clear the pending event from exti line
 		Start_BLDC_Motor_Up_FrontLeft();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 }
 void EXTI15_10_IRQHandler(void)
@@ -56,30 +59,35 @@ void EXTI15_10_IRQHandler(void)
 		GPIO_IRQHandling(RapidDownFrontLeftBtn);
 		//clear the pending event from exti line
 		Start_BLDC_Motor_Down_FrontLeft();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 	if(EXTI->PR & (1 << RapidUpRearRightBtn))
 	{
 		GPIO_IRQHandling(RapidUpRearRightBtn);
 		 //clear the pending event from exti line
 		Start_BLDC_Motor_Up_RearRight();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 	if(EXTI->PR & (1 << RapidDownRearRightBtn))
 	{
 		GPIO_IRQHandling(RapidDownRearRightBtn);
 			//clear the pending event from exti line
 		Start_BLDC_Motor_Down_RearRight();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 	if(EXTI->PR & (1 << RapidUpRearLeftBtn))
 	{
 		GPIO_IRQHandling(RapidUpRearLeftBtn);
 		//clear the pending event from exti line
 		Start_BLDC_Motor_Up_RearLeft();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 	if(EXTI->PR & (1 << RapidDownRearLeftBtn))
 	{
 		GPIO_IRQHandling(RapidDownRearLeftBtn);
 		//clear the pending event from exti line
 		Start_BLDC_Motor_Down_RearLeft();
+		DelayMillis(3000); // let run the motor for 3 seconds
 	}
 }
 void PCLK_Enable(void)
