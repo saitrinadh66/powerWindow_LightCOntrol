@@ -7,6 +7,25 @@
 #include"PowerWindow.h"
 
 
+void AntiPinch_GPIO_Init(void)
+{
+	GPIO_Handle_t GPIO_PW_AntiPinch;
+	GPIO_PW_AntiPinch.pGPIOx = GPIOF;
+	// various register configuration
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinNumber 		= AntiPinchTRIG;
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinOPType 		= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
+
+	GPIO_Init(&GPIO_PW_AntiPinch);
+
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinNumber 		= AntiPinchECHO; // used for RapidUpDriver
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinMode			= GPIO_MODE_INPUT;
+	GPIO_PW_AntiPinch.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_PIN_PU;
+
+	GPIO_Init(&GPIO_PW_AntiPinch);
+}
 
 /****************************************************************************************************
  * @fn 				   - GPIO_PW_Output_Init														*
@@ -132,6 +151,43 @@ void GPIO_PW_Input_Init(void)
 void AntiPinch(void)
 {
 
+	uint32_t numTicks = 0;
+	const float speedSound = 0.343/2;
+	int distance = 0;
+	GPIO_WriteToOutputPin(GPIOF, AntiPinchTRIG, GPIO_PIN_RESET);
+	DelayMicros(2);
+	GPIO_WriteToOutputPin(GPIOF, AntiPinchTRIG, GPIO_PIN_SET);
+	DelayMicros(10);
+	GPIO_WriteToOutputPin(GPIOF, AntiPinchTRIG, GPIO_PIN_RESET);
+
+	while(GPIO_ReadFromInputPin(GPIOF, AntiPinchECHO) == GPIO_PIN_RESET);
+
+	while(GPIO_ReadFromInputPin(GPIOF, AntiPinchECHO) == GPIO_PIN_SET)
+	{
+		numTicks++;
+		DelayMicros(2);
+	}
+	distance = ((numTicks)*2*speedSound);
+	if(distance < 5)
+	{
+		Stop_BLDC_Motor_RearLeft();
+		Stop_BLDC_Motor_FrontLeft();
+		Stop_BLDC_Motor_RearRight();
+		Stop_BLDC_Motor_Driver();
+	}
+#if 0
+	// for testing Sensor
+	if(distance < 20)
+	{
+		GPIO_WriteToOutputPin(GPIOG, GPIO_PIN_NO_14, GPIO_PIN_SET);
+		GPIO_WriteToOutputPin(GPIOG, GPIO_PIN_NO_13, GPIO_PIN_RESET);
+	}
+	else
+	{
+		GPIO_WriteToOutputPin(GPIOG, GPIO_PIN_NO_14, GPIO_PIN_RESET);
+		GPIO_WriteToOutputPin(GPIOG, GPIO_PIN_NO_13, GPIO_PIN_SET);
+	}
+#endif
 }
 
 /****************************************************************************************************
