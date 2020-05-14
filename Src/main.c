@@ -12,69 +12,85 @@
 #endif
 
 
-#include"main.h"
+#include "main.h"
 
-#define HIGH 					1
-#define BTN_PRESSED 			LOW
-static void GPIO_InOut_Init(void);
-void delay(void)
-{
-	for(uint32_t i = 0; i < 500000; i++);
-}
 
 int main(void)
 {
-	RapidUpFrontLeftBtn();
-	RapidUpDriverBtn();
-	while(1);
+	PCLK_Enable();
+	GPIO_PW_Output_Init();
+	GPIO_LC_Output_Init();
+	GPIO_PW_Input_Init();
+	GPIO_LC_Input_Init();
+	while(1)
 	{
-		LC_GlobeBoxStatus(1);
+		GPIO_LC_Operations();
 	}
 }
-static void GPIO_InOut_Init(void)
-{
-	GPIO_Handle_t GPIO_InStruct;
-	/*GPIO ports clock enable*/
-	GPIO_PCLK_Control(GPIOG, ENABLE);
-	GPIO_PCLK_Control(GPIOD, ENABLE);
-	GPIO_PCLK_Control(GPIOC, ENABLE);
 
-	/*Configuring GPIO pin: PD12 PD13 PD14 PD15 */
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinNumber 	 = GPIO_PIN_NO_12|GPIO_PIN_NO_13|GPIO_PIN_NO_14|GPIO_PIN_NO_15;
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinMode 		 = GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinSpeed 		 = GPIO_SPEED_FAST;  // Fast Speed is Selected
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinOPType 	 = GPIO_OUT_TYPE_PP;  // Push Pull Configuration
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;    // No Pull Up or No Pull Down
-	GPIO_Init(GPIOD,&GPIO_InStruct);
-
-	/*Configuring GPIO pin: PC12 PC13 PC14 PC15 */
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinNumber 	 = GPIO_PIN_NO_12|GPIO_PIN_NO_13|GPIO_PIN_NO_14|GPIO_PIN_NO_15;
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinMode 		 = GPIO_MODE_OUTPUT;  // GPIO output mode is configured as Output
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinSpeed  	 = GPIO_SPEED_FAST;  // Fast Speed is Selected
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinOPType 	 = GPIO_OUT_TYPE_PP;  // Push Pull Configuration
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;    // No Pull Up or No Pull Down
-	GPIO_Init(GPIOC,&GPIO_InStruct);
-
-
-	/*Configuring GPIO pin: PD0 PD1 PD2 PD3 PD4 PD5 PD6 PD7 */
-		GPIO_InStruct.GPIO_PinConfig.GPIO_PinNumber 	= GPIO_PIN_NO_0|GPIO_PIN_NO_1|GPIO_PIN_NO_2|GPIO_PIN_NO_3|GPIO_PIN_NO_4|GPIO_PIN_NO_5|GPIO_PIN_NO_6|GPIO_PIN_NO_7;
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinMode 			= GPIO_MODE_INPUT;  // GPIO output mode is configured as Output
-	//GPIO_Input.GPIO_PinConfig.GPIO_PinSpeed			= GPIO_SPEED_FAST;  // Fast Speed is Selected
-	//GPIO_Input.GPIO_PinConfig.GPIO_PinOPType 			= GPIO_OUT_TYPE_PP;  // Push Pull Configuration
-	GPIO_InStruct.GPIO_PinConfig.GPIO_PinPuPdControl 	= GPIO_NO_PUPD;    // No Pull Up or No Pull Down
-	GPIO_Init(GPIOD,&GPIO_InStruct);
-}
 void EXTI9_5_IRQHandler(void)
 {
-    //delay(); //200ms . wait till button de-bouncing gets over
-	GPIO_IRQHandling(GPIO_PIN_NO_5); //clear the pending event from exti line
-	LC_HeadLampStatus(1);
-}
+  	if(EXTI->PR & (1 << RapidUpDriverBtn))
+	{
+		GPIO_IRQHandling(RapidUpDriverBtn);//clear the pending event from exti line
+		Start_BLDC_Motor_Up_Driver();
 
-void EXTI0_IRQHandler(void)
+	}
+	if(EXTI->PR & (1 << RapidDownDriverBtn))
+	{
+		GPIO_IRQHandling(RapidDownDriverBtn);
+		 //clear the pending event from exti line
+		Start_BLDC_Motor_Down_Driver();
+	}
+	if(EXTI->PR & (1 << RapidUpFrontLeftBtn))
+	{
+		GPIO_IRQHandling(RapidUpFrontLeftBtn);
+		//clear the pending event from exti line
+		Start_BLDC_Motor_Up_FrontLeft();
+	}
+}
+void EXTI15_10_IRQHandler(void)
 {
-    //delay(); //200ms . wait till button de-bouncing gets over
-	GPIO_IRQHandling(GPIO_PIN_NO_0); //clear the pending event from exti line
-	LC_ReadingLight(2);
+	if(EXTI->PR & (1 << RapidDownFrontLeftBtn))
+	{
+		GPIO_IRQHandling(RapidDownFrontLeftBtn);
+		//clear the pending event from exti line
+		Start_BLDC_Motor_Down_FrontLeft();
+			}
+	if(EXTI->PR & (1 << RapidUpRearRightBtn))
+	{
+		GPIO_IRQHandling(RapidUpRearRightBtn);
+		 //clear the pending event from exti line
+		Start_BLDC_Motor_Up_RearRight();
+
+	}
+	if(EXTI->PR & (1 << RapidDownRearRightBtn))
+	{
+		GPIO_IRQHandling(RapidDownRearRightBtn);
+			//clear the pending event from exti line
+		Start_BLDC_Motor_Down_RearRight();
+
+	}
+	if(EXTI->PR & (1 << RapidUpRearLeftBtn))
+	{
+		GPIO_IRQHandling(RapidUpRearLeftBtn);
+		//clear the pending event from exti line
+		Start_BLDC_Motor_Up_RearLeft();
+
+	}
+	if(EXTI->PR & (1 << RapidDownRearLeftBtn))
+	{
+		GPIO_IRQHandling(RapidDownRearLeftBtn);
+		//clear the pending event from exti line
+		Start_BLDC_Motor_Down_RearLeft();
+	}
+}
+void PCLK_Enable(void)
+{
+	GPIO_PCLK_Control(GPIOA, ENABLE);
+	GPIO_PCLK_Control(GPIOB, ENABLE);
+	GPIO_PCLK_Control(GPIOC, ENABLE);
+	GPIO_PCLK_Control(GPIOD, ENABLE);
+	GPIO_PCLK_Control(GPIOE, ENABLE);
 }
 
